@@ -6,15 +6,14 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/18 17:25:10 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/18 17:33:56 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdlib.h>
 
 int main(void)
 {
-	//commit by dsohn
+	write(1, "Hello World!\n", 13);
 	return (0);
 }
