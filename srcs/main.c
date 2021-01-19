@@ -6,14 +6,12 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/19 20:13:24 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/19 21:46:39 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <fcntl.h>
-#include "libft/libft.h"
-#include <stdio.h>
+#include "minishell.h"
+#include <printf.h>
 
 int main(void)
 {
@@ -28,7 +26,13 @@ int main(void)
 	}
 	while (get_next_line(fd, &line) != 0)
 	{
+		//write(1, line, ft_strlen(line));
+		//write(1, "\n", 1);
 		printf("%s\n", line);
 		free (line);
 	}
+	//write(1, line, ft_strlen(line));
+	//write(1, "\n", 1);
+	printf("%s\n", line);
+	free (line);
 }
