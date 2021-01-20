@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   print_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/20 14:28:23 by hyeonski         ###   ########.fr       */
+/*   Created: 2021/01/20 14:24:14 by hyeonski          #+#    #+#             */
+/*   Updated: 2021/01/20 14:25:00 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-#include <unistd.h>
-#include <fcntl.h>
-#include "../libft/libft.h"
-
-int		ascii_art(void);
-void	print_prompt(void);
-int		get_input(char **line);
-char	**parse_command(char *line);
-
-
-#include <stdio.h>
-
-#endif
+void	print_prompt(void)
+{
+	write(1, "minishell$ ", 12);
+}

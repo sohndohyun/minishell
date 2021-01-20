@@ -2,7 +2,11 @@ NAME=minishell
 CC=gcc
 FLAG=-Wall -Wextra -Werror
 LIBFT=./libft/libft.a
-SRCS= srcs/main.c
+SRCS= srcs/main.c \
+		srcs/print_prompt.c \
+		srcs/get_input.c \
+		srcs/parse_command.c \
+		srcs/utils.c 
 HEADER= -I./include/. -I./libft/.
 all:
 	$(MAKE) -C ./libft
