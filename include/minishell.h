@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/19 21:43:12 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/20 11:12:19 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "../libft/libft.h"
+
+
+#include <stdio.h>
 
 #endif
