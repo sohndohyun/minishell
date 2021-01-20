@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parse_command.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/20 14:28:23 by hyeonski         ###   ########.fr       */
+/*   Created: 2021/01/20 14:25:20 by hyeonski          #+#    #+#             */
+/*   Updated: 2021/01/20 15:28:14 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-#include <unistd.h>
-#include <fcntl.h>
-#include "../libft/libft.h"
-
-int		ascii_art(void);
-void	print_prompt(void);
-int		get_input(char **line);
-char	**parse_command(char *line);
+#include "minishell.h"
 
 
-#include <stdio.h>
+char	**parse_command(char *line)
+{
+	char	**command;
+	int		i;
+	char	*temp;
 
-#endif
+	command = ft_split(line, ';');
+	i = 0;
+	while (command[i])
+	{
+		temp = command[i];
+		command[i] = ft_strtrim(command[i], " ");
+		free(temp);
+		i++;
+	}
+	i = 0;
+	printf("commmand : \n");
+	while (command[i])
+		printf("%s$\n", command[i++]);
+	free(line);
+	return (command);
+}

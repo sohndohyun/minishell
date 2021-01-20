@@ -12,77 +12,63 @@
 
 #include "libft.h"
 
-static char	**drr_init(char const *s, char c, int *wd_cnt)
+size_t		get_cnt(char const *s, char c)
 {
-	int		i;
-	int		key;
-	char	**result;
+	size_t		cnt;
 
-	key = 0;
-	*wd_cnt = 0;
-	i = 0;
-	while (s[i])
+	cnt = 0;
+	while (*s != '\0')
 	{
-		if (s[i] != c && key == 0)
+		if (*s == c)
+			s++;
+		else
 		{
-			key = 1;
-			(*wd_cnt)++;
+			cnt++;
+			while (*s != '\0' && *s != c)
+				s++;
 		}
-		else if (s[i] == c)
-			key = 0;
-		i++;
 	}
-	if (!(result = (char **)malloc(sizeof(char *) * (*wd_cnt + 1))))
-	{
-		free(result);
-		return (0);
-	}
-	return (result);
+	return (cnt);
 }
 
-static char	*put_result(char const *s, int start, int end)
+char		**free_machine(char **s, size_t idx)
 {
-	char	*str;
-	int		i;
-
-	i = 0;
-	str = (char *)malloc(sizeof(char) * (end - start + 1));
-	if (str == 0)
+	while (s[idx] != NULL && idx >= 0)
 	{
-		free(str);
-		return (0);
+		free(s[idx]);
+		s[idx] = NULL;
+		idx--;
 	}
-	while (start < end)
-		str[i++] = s[start++];
-	str[i] = 0;
-	return (str);
+	free(s);
+	s = NULL;
+	return (NULL);
 }
 
 char		**ft_split(char const *s, char c)
 {
-	int		i;
-	int		k;
-	int		wd_cnt;
-	int		start;
-	char	**result;
+	size_t		idx;
+	size_t		len;
+	size_t		word_cnt;
+	char		**words;
 
-	i = 0;
-	k = 0;
-	if (s == 0)
-		return (0);
-	result = drr_init(s, c, &wd_cnt);
-	if (result == 0)
-		return (0);
-	while (k < wd_cnt)
+	if (!s || !(words = (char **)malloc(sizeof(char *) * (get_cnt(s, c) + 1))))
+		return (NULL);
+	word_cnt = get_cnt(s, c);
+	idx = 0;
+	while (*s)
 	{
-		while (s[i] && s[i] == c)
-			i++;
-		start = i;
-		while (s[i] && s[i] != c)
-			i++;
-		result[k++] = put_result(s, start, i);
-		i++;
+		if (*s == c)
+			s++;
+		else
+		{
+			len = 0;
+			while (*(s + len) && *(s + len) != c)
+				len++;
+			if (idx < word_cnt && !(words[idx++] = ft_substr(s, 0, len)))
+				return (free_machine(words, idx));
+			s += len;
+		}
 	}
-	result[k] = 0;
-	return (result);
+	words[idx] = NULL;
+	return (words);
 }
