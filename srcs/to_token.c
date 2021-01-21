@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:53:04 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/22 03:27:58 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/22 03:50:24 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,23 @@ static int		find_token_length(char *str)
 t_list*			to_token(char *str)
 {
 	t_list *list;
+	int		token_len;
+	char	*temp;
 
 	list = NULL;
-	
+	while (*str)
+	{
+		if (ft_isspace(*str))
+			str++;
+		else
+		{
+			token_len = find_token_length(str);
+			temp = malloc(token_len + 1);
+			temp[token_len] = NULL;
+			ft_strlcpy(temp, str, token_len + 1);
+			ft_lstadd_back(&list, ft_lstnew(temp));
+			str += token_len;
+		}
+	}
+	return (list);
 }
