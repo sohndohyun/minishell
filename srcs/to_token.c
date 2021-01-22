@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:53:04 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/22 03:50:24 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/22 15:04:18 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int		find_token_length(char *str)
 {
 	int		imsi;
 
-	if (strncmp(*str, "<<", 2) == 0)
+	if (ft_strncmp(str, "<<", 2) == 0)
 		return (2);
 	else if (*str == '<' || *str == '|' || *str == '>')
 		return (1);
@@ -77,7 +77,7 @@ t_list*			to_token(char *str)
 		{
 			token_len = find_token_length(str);
 			temp = malloc(token_len + 1);
-			temp[token_len] = NULL;
+			temp[token_len] = '\0';
 			ft_strlcpy(temp, str, token_len + 1);
 			ft_lstadd_back(&list, ft_lstnew(temp));
 			str += token_len;

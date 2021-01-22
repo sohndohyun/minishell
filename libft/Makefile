@@ -48,6 +48,8 @@ FILES = ft_memset \
 		ft_lstclear \
 		ft_lstiter \
 		ft_lstmap \
+		ft_strcmp \
+		ft_isspace \
 		get_next_line
 
 SRCS_DIR = ./
