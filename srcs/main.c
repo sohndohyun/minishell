@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/20 17:14:09 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/22 13:38:18 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,23 @@ int		ascii_art(void)
 	return (1);
 }
 
+int		setup(void)
+{
+	if (!ascii_art())
+		return (0);
+	signal(SIGINT, (void *)handle_signal);
+	signal(SIGQUIT, (void *)handle_signal);
+	return (1);
+}
+
 int		main(void)
 {
 	char *line;
 	char **command;
 	
-	if (!ascii_art())
+	if (!setup())
 		return (1);
+
 	while (1)
 	{
 		print_prompt();

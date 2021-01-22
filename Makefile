@@ -6,6 +6,8 @@ SRCS= srcs/main.c \
 		srcs/print_prompt.c \
 		srcs/get_input.c \
 		srcs/parse_command.c \
+		srcs/signal_handle.c \
+		srcs/to_token.c \
 		srcs/utils.c 
 HEADER= -I./include/. -I./libft/.
 all:
