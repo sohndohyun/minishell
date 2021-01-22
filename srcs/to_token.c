@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   to_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:53:04 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/22 15:04:18 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/22 20:19:35 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 static int		find_next_ch(char *str, char c)
 {
@@ -62,9 +62,9 @@ static int		find_token_length(char *str)
 	return (find_token_non_end(str));
 }
 
-t_list*			to_token(char *str)
+t_list			*to_token(char *str)
 {
-	t_list *list;
+	t_list	*list;
 	int		token_len;
 	char	*temp;
 

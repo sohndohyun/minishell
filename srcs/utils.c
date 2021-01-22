@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:27:06 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/22 13:54:44 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/22 20:28:13 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_free_and_null(void **ptr)
 	*ptr = NULL;
 }
 
-void	ft_free_2d_arr(void	 **ptr)
+void	ft_free_2d_arr(void **ptr)
 {
 	int i;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/22 13:38:18 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/22 20:29:23 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		ascii_art(void)
 {
-	int fd;
-	char *line;
+	int		fd;
+	char	*line;
 
 	line = 0;
 	if (!(fd = open("ascii_art.txt", O_RDONLY)))
@@ -27,11 +27,11 @@ int		ascii_art(void)
 	{
 		write(1, line, ft_strlen(line));
 		write(1, "\n", 1);
-		free (line);
+		free(line);
 	}
 	write(1, line, ft_strlen(line));
 	write(1, "\n", 1);
-	free (line);
+	free(line);
 	return (1);
 }
 
@@ -46,12 +46,11 @@ int		setup(void)
 
 int		main(void)
 {
-	char *line;
-	char **command;
-	
+	char	*line;
+	char	**command;
+
 	if (!setup())
 		return (1);
-
 	while (1)
 	{
 		print_prompt();

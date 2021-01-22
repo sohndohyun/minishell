@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_command.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:25:20 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/22 14:45:40 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/22 20:30:02 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	trim_command(char **command)
 {
-	int i;
+	int		i;
 	char	*temp;
 
 	i = 0;
