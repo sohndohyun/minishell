@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/22 20:29:23 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/23 18:10:58 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,35 @@ int		setup(void)
 	return (1);
 }
 
-int		main(void)
+t_list		*g_env;
+
+t_list		*get_env(int argc, char **argv, char **envp)
+{
+	int		pos;
+	t_env	*env;
+	t_list	*envs;
+
+	envs = 0;
+	while (*envp)
+	{
+		env = (t_env *)malloc(sizeof(t_env));
+		pos = ft_strchr(*envp, '=') - *envp;
+		env->key = ft_substr(*envp, 0, pos);
+		env->value = ft_substr(*envp, pos + 1, ft_strlen(*envp) - pos - 1);
+		ft_lstadd_back(&envs, ft_lstnew(env));
+		envp++;
+	}
+	return (envs);
+}
+
+int		main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	char	**command;
 
 	if (!setup())
 		return (1);
+	g_env = get_env(argc, argv, envp);
 	while (1)
 	{
 		print_prompt();
