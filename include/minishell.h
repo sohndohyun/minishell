@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/22 15:04:29 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/23 18:04:22 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void	ft_free_2d_arr(void	 **ptr);
 int		has_empty_command(char **command);
 int		is_semicolon_syntax_error(char **command, char *line);
 t_list*		to_token(char *str);
+
+typedef struct	s_env
+{
+	char	*key;
+	char	*value;
+}				t_env;
 
 #include <stdio.h>
 
