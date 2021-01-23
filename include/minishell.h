@@ -39,6 +39,13 @@ typedef struct	s_env
 	char	*value;
 }				t_env;
 
+typedef struct	s_cmd
+{
+	int	type;
+	char	**argv;
+	int	**pfd;
+}		t_cmd;
+
 #include <stdio.h>
 
 #endif
