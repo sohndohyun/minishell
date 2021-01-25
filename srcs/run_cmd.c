@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 01:49:29 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/25 03:55:52 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/25 19:17:34 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void run_cmd(t_cmd *cmd)
 	{
 		execvp(cmd->argv[0], cmd->argv);
 		printf("execvp_error!");
+		exit(1);
 	}
-	exit(1);
+	exit(0);
 }
