@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:53:04 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/22 20:19:35 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/25 13:19:31 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		find_next_ch(char *str, char c)
 static int		need_seperate(char c)
 {
 	return (ft_isspace(c) || c == '<' || c == '>'
-			|| c == '\'' || c == '\"' || c == '|');
+			|| c == '\'' || c == '\"' || c == '|' || c == ';');
 }
 
 static int		find_token_non_end(char *str)
@@ -52,7 +52,7 @@ static int		find_token_length(char *str)
 
 	if (ft_strncmp(str, "<<", 2) == 0)
 		return (2);
-	else if (*str == '<' || *str == '|' || *str == '>')
+	else if (*str == '<' || *str == '|' || *str == '>' || *str == ';')
 		return (1);
 	else if (*str == '\'' || *str == '\"')
 	{

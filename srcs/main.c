@@ -52,6 +52,8 @@ t_list		*get_env(char **envp)
 	t_env	*env;
 	t_list	*envs;
 
+	argc += 0;
+	argv += 0;
 	envs = 0;
 	while (*envp)
 	{
@@ -65,10 +67,33 @@ t_list		*get_env(char **envp)
 	return (envs);
 }
 
+void	print_cmd(t_cmd *cmd)
+{
+	int	i;
+	char	**temp;
+
+	temp = cmd->argv;
+	i = -1;
+	while (temp[++i])
+		printf("argv[%d]: %s\n", i, temp[i]);
+	printf("%c\n", cmd->type);
+	printf("%d\n", *(cmd->pfd));
+}
+
+void	print_list(t_list *list)
+{
+	while (list)
+	{
+		print_cmd(list->content);
+		list = list->next;
+	}
+}
+
 int		main(int argc, char **argv, char **envp)
 {
 	char	*line;
-	char	**command;
+	t_list	*token;
+	t_list	*cmd;
 
 	(void)argc;
 	(void)argv;
@@ -80,6 +105,8 @@ int		main(int argc, char **argv, char **envp)
 		print_prompt();
 		if (!get_input(&line))
 			continue ;
-		command = parse_command(line);
+		token = to_token(line);
+		cmd = to_cmd(token);
+		print_list(cmd);
 	}
 }
