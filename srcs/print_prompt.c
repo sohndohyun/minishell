@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:24:14 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/22 20:29:42 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/25 10:01:16 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	print_prompt(void)
 {
-	write(1, "minishell$ ", 12);
+	write(STDOUT_FILENO, "minishell$ ", 12);
 }

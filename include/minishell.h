@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/23 18:04:22 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/25 14:15:27 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 int		ascii_art(void);
 void	print_prompt(void);
 int		get_input(char **line);
-char	**parse_command(char *line);
 void	trim_command(char **command);
 void	handle_signal(int signo);
 int		setup(void);
@@ -32,6 +31,7 @@ void	ft_free_2d_arr(void	 **ptr);
 int		has_empty_command(char **command);
 int		is_semicolon_syntax_error(char **command, char *line);
 t_list*		to_token(char *str);
+t_list	*to_cmd(t_list *token);
 
 typedef struct	s_env
 {
@@ -43,7 +43,7 @@ typedef struct	s_cmd
 {
 	int	type;
 	char	**argv;
-	int	**pfd;
+	int	*pfd;
 }		t_cmd;
 
 #include <stdio.h>
