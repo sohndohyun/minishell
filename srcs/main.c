@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/25 14:59:46 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/25 20:43:08 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		setup(void)
 
 t_list		*g_env;
 
-t_list		*get_env(int argc, char **argv, char **envp)
+t_list		*get_env(char **envp)
 {
 	int		pos;
 	t_env	*env;
@@ -95,9 +95,11 @@ int		main(int argc, char **argv, char **envp)
 	t_list	*token;
 	t_list	*cmd;
 
+	(void)argc;
+	(void)argv;
 	if (!setup())
 		return (1);
-	g_env = get_env(argc, argv, envp);
+	g_env = get_env(envp);
 	while (1)
 	{
 		print_prompt();
