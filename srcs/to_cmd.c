@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:24 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/25 15:02:36 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/25 19:18:57 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,13 @@ t_list	*to_cmd(t_list *token)
 {
 	t_list	*list;
 	t_cmd	*temp;
-	int		pfd[2];
 
 	list = NULL;
-	pipe(pfd);
 	while (token)
 	{
 		temp = malloc(sizeof(t_cmd));
 		temp->argv = parse_argv(&token);
 		temp->type = parse_type(&token);
-		temp->pfd = pfd;
 		ft_lstadd_back(&list, ft_lstnew(temp));
 	}
 	return (list);
