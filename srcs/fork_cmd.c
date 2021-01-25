@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 12:16:55 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/25 20:40:07 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/25 21:16:49 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void fork_cmd(t_list *cmd_list)
 	while (it)
 	{
 		cmd = it->content;
-		if (cmd->type == CT_PIPE)
+		if (cmd->type == '|')
 		{
 			pipe(pi);
 			bcmd->pfd[1][0] = pi[0];
