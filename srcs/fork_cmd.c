@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 12:16:55 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/25 21:16:49 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/25 22:26:04 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,13 @@ void fork_cmd(t_list *cmd_list)
 	t_cmd	*cmd;
 	t_cmd	*bcmd;
 	int		pi[2];
-	pid_t	*pid;
-	int		i;
+	pid_t	pid;
 	int		cmd_count;
 	int		status;
 
 	cmd_count = ft_lstsize(cmd_list);
 	bcmd = NULL;
 	it = cmd_list;
-	pid = malloc(sizeof(pid_t) * cmd_count);
 	while (it)
 	{
 		cmd = it->content;
@@ -42,11 +40,10 @@ void fork_cmd(t_list *cmd_list)
 		bcmd = cmd;
 	}
 	it = cmd_list;
-	i = 0;
 	while (it)
 	{
 		cmd = it->content;
-		if (!(pid[i] = fork()))
+		if (!(pid = fork()))
 		{
 			if (cmd->pfd[0][0] != -1)
 				dup2(cmd->pfd[0][0], 0);
@@ -58,10 +55,8 @@ void fork_cmd(t_list *cmd_list)
 			close(cmd->pfd[0][0]);
 		if (cmd->pfd[1][0] != -1)
 			close(cmd->pfd[1][1]);
-		i++;
+		waitpid(pid, &status, 0);
+		//status 처리 ???
 		it = it->next;
 	}
-	i = -1;
-	while (++i < cmd_count)
-		waitpid(pid[i], &status, 0);
 }
