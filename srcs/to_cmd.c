@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:24 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/25 20:40:56 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/25 21:21:23 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**parse_argv(t_list **token)
 	return (argv);
 }
 
-int		parse_type(t_list **token)
+int		parse_type(t_list **token, int flag)
 {
 	char	*temp;
 	int		type;
@@ -41,6 +41,8 @@ int		parse_type(t_list **token)
 	type = 0;
 	if (*token == NULL)	
 		return (0);
+	if (flag == 1)
+		return (';');	
 	if (ft_strcmp((*token)->content, "|") == 0
 	|| ft_strcmp((*token)->content, ";") == 0)
 	{
@@ -55,18 +57,22 @@ t_list	*to_cmd(t_list *token)
 {
 	t_list	*list;
 	t_cmd	*temp;
+	int		flag;
 
+
+	flag = 1;
 	list = NULL;
 	while (token)
 	{
 		temp = malloc(sizeof(t_cmd));
+		temp->type = parse_type(&token, flag);
 		temp->argv = parse_argv(&token);
-		temp->type = parse_type(&token);
 		temp->pfd[0][0] = -1;
 		temp->pfd[0][1] = -1;
 		temp->pfd[1][0] = -1;
 		temp->pfd[1][1] = -1;
 		ft_lstadd_back(&list, ft_lstnew(temp));
+		flag = 0;
 	}
 	return (list);
 }
