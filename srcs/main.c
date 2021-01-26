@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/26 17:20:06 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/26 21:28:09 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int		setup(void)
 	signal(SIGQUIT, (void *)handle_signal);
 	return (1);
 }
-
-t_list		*g_env;
 
 t_list		*get_env(char **envp)
 {
@@ -94,12 +92,13 @@ int		main(int argc, char **argv, char **envp)
 	char	*line;
 	t_list	*token;
 	t_list	*cmd;
+	t_list	*env;
 
 	(void)argc;
 	(void)argv;
 	if (!setup())
 		return (1);
-	g_env = get_env(envp);
+	env = get_env(envp);
 	while (1)
 	{
 		print_prompt();
