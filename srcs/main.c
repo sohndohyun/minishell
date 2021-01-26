@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/25 20:54:35 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/26 17:20:06 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,30 @@ t_list		*get_env(char **envp)
 	return (envs);
 }
 
+void	print_cmd(t_cmd *cmd)
+{
+	int i;
+	char **temp;
+
+	i = 0;
+	temp = cmd->argv;
+	while (temp[i])
+	{
+		printf("argv[%d]: %s\n", i, temp[i]);
+		i++;
+	}
+	printf("type: %c\n", cmd->type);
+}
+
+void	print_list(t_list *cmd)
+{
+	while (cmd)
+	{
+		print_cmd(cmd->content);
+		cmd = cmd->next;
+	}
+}
+
 int		main(int argc, char **argv, char **envp)
 {
 	char	*line;
@@ -83,6 +107,7 @@ int		main(int argc, char **argv, char **envp)
 			continue ;
 		token = to_token(line);
 		cmd = to_cmd(token);
+		print_list(cmd);
 		fork_cmd(cmd);
 	}
 }

@@ -10,7 +10,17 @@ SRCS= srcs/main.c \
 		srcs/to_cmd.c \
 		srcs/utils.c \
 		srcs/run_cmd.c \
-		srcs/fork_cmd.c
+		srcs/fork_cmd.c \
+		srcs/ft_cd.c \
+		srcs/ft_echo.c \
+		srcs/ft_env.c \
+		srcs/ft_exit.c \
+		srcs/ft_export.c \
+		srcs/ft_pwd.c \
+		srcs/ft_unset.c \
+		srcs/env_utils.c \
+		srcs/error.c
+
 HEADER= -I./include/. -I./libft/.
 all:
 	$(MAKE) -C ./libft

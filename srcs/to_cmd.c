@@ -6,22 +6,39 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:24 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/25 21:21:23 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/26 19:39:52 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int		get_argv_len(t_list *token)
+{
+	int i;
+
+	i = 0;
+	while (token
+	&& ft_strcmp(token->content, "|") != 0
+	&& ft_strcmp(token->content, ";") != 0)
+	{
+		i++;
+		token = token->next;
+	}
+	return (i);
+}
+
 char	**parse_argv(t_list **token)
 {
 	char	**argv;
 	int		i;
+	int		len;
 
 	if (*token == NULL)	
 		return (0);
 	i = 0;
-	argv = malloc(sizeof(char *) * 4);
-	while (*token && i < 3
+	len = get_argv_len(*token);
+	argv = malloc(sizeof(char *) * (len + 1));
+	while (*token
 	&& ft_strcmp((*token)->content, "|") != 0
 	&& ft_strcmp((*token)->content, ";") != 0)
 	{
