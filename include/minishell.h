@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/26 16:35:10 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/26 21:27:42 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ t_list*			to_cmd(t_list *token);
 t_list*			to_token(char *str);
 void			run_cmd(t_cmd *cmd);
 void			fork_cmd(t_list *cmd_list);
-void			token_switch(t_list *token, t_list *env);
 
 #include <stdio.h>
 

@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/26 16:35:17 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/26 21:28:09 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int		main(int argc, char **argv, char **envp)
 		if (!get_input(&line))
 			continue ;
 		token = to_token(line);
-		token_switch(token, env);
 		cmd = to_cmd(token);
 		fork_cmd(cmd);
 	}

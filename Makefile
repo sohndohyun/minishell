@@ -10,8 +10,7 @@ SRCS= srcs/main.c \
 		srcs/to_cmd.c \
 		srcs/utils.c \
 		srcs/run_cmd.c \
-		srcs/fork_cmd.c \
-		srcs/token_switch.c
+		srcs/fork_cmd.c
 HEADER= -I./include/. -I./libft/.
 all:
 	$(MAKE) -C ./libft
