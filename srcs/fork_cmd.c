@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 12:16:55 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/26 21:47:10 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/26 22:39:47 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ void fork_cmd(t_list *cmd_list)
 					dup2(cmd->pfd[0][0], 0);
 				if (cmd->pfd[1][0] != -1)
 					dup2(cmd->pfd[1][1], 1);
-				execvp(cmd->argv[0], cmd->argv);
-				printf("execvp_error!");
-				exit(1);
+				run_cmd(cmd);
 			}
 			if (cmd->pfd[0][0] != -1)
 				close(cmd->pfd[0][0]);
