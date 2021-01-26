@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/26 21:27:42 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/26 21:55:53 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_env	*new_env(char *key, char *value);
 void	add_env(t_list *env, char *key, char *value);
 void	modify_value(t_env *env, char *value);
 void	modify_env(t_list *env, char *key, char *value);
+int		run_cmd_builtin(t_cmd *cmd);
 
 extern t_list		*g_env;
 

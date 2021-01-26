@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/26 21:28:09 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/26 22:00:35 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_list	*g_env;
 
 int		ascii_art(void)
 {
@@ -99,6 +101,7 @@ int		main(int argc, char **argv, char **envp)
 	if (!setup())
 		return (1);
 	env = get_env(envp);
+	g_env = env;
 	while (1)
 	{
 		print_prompt();

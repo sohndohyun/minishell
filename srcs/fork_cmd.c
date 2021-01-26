@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 12:16:55 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/26 21:26:11 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/26 21:47:10 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void fork_cmd(t_list *cmd_list)
 	pid_t	pid;
 	int		cmd_count;
 	int		status;
-
 	cmd_count = ft_lstsize(cmd_list);
 	bcmd = NULL;
 	it = cmd_list;
@@ -43,20 +42,25 @@ void fork_cmd(t_list *cmd_list)
 	while (it)
 	{
 		cmd = it->content;
-		if (!(pid = fork()))
+		if (!run_cmd_builtin(cmd))
 		{
+			if (!(pid = fork()))
+			{
+				if (cmd->pfd[0][0] != -1)
+					dup2(cmd->pfd[0][0], 0);
+				if (cmd->pfd[1][0] != -1)
+					dup2(cmd->pfd[1][1], 1);
+				execvp(cmd->argv[0], cmd->argv);
+				printf("execvp_error!");
+				exit(1);
+			}
 			if (cmd->pfd[0][0] != -1)
-				dup2(cmd->pfd[0][0], 0);
+				close(cmd->pfd[0][0]);
 			if (cmd->pfd[1][0] != -1)
-				dup2(cmd->pfd[1][1], 1);
-			run_cmd(cmd);
+				close(cmd->pfd[1][1]);
+			waitpid(pid, &status, 0);
+			//status 처리 ???
 		}
-		if (cmd->pfd[0][0] != -1)
-			close(cmd->pfd[0][0]);
-		if (cmd->pfd[1][0] != -1)
-			close(cmd->pfd[1][1]);
-		waitpid(pid, &status, 0);
-		//status 처리 ???
 		it = it->next;
 	}
 }
