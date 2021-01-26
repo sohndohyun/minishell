@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/25 20:54:35 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/26 16:35:17 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int		setup(void)
 	return (1);
 }
 
-t_list		*g_env;
-
 t_list		*get_env(char **envp)
 {
 	int		pos;
@@ -70,18 +68,20 @@ int		main(int argc, char **argv, char **envp)
 	char	*line;
 	t_list	*token;
 	t_list	*cmd;
+	t_list	*env;
 
 	(void)argc;
 	(void)argv;
 	if (!setup())
 		return (1);
-	g_env = get_env(envp);
+	env = get_env(envp);
 	while (1)
 	{
 		print_prompt();
 		if (!get_input(&line))
 			continue ;
 		token = to_token(line);
+		token_switch(token, env);
 		cmd = to_cmd(token);
 		fork_cmd(cmd);
 	}
