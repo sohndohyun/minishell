@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/25 20:42:16 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/26 16:35:10 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ void			trim_input(char **line);
 void			ft_free_2d_arr(void	 **ptr);
 int				has_empty_command(char **command);
 int				is_semicolon_syntax_error(char **command, char *line);
-t_list*		to_cmd(t_list *token);
+t_list*			to_cmd(t_list *token);
 t_list*			to_token(char *str);
 void			run_cmd(t_cmd *cmd);
 void			fork_cmd(t_list *cmd_list);
-
+void			token_switch(t_list *token, t_list *env);
 
 #include <stdio.h>
 
