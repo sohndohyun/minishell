@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/26 22:00:35 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/29 00:36:27 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,15 @@ int		main(int argc, char **argv, char **envp)
 	{
 		print_prompt();
 		if (!get_input(&line))
-			continue ;
-		token = to_token(line);
-		cmd = to_cmd(token);
+			continue ; //nothing input!
+		if (!(token = to_token(line)) || !(cmd = to_cmd(token)))
+		{
+			write(1, "minishell: syntax error!\n", 25);
+			continue ; //syntax error! 
+		}
 		print_list(cmd);
 		fork_cmd(cmd);
+		ft_lstclear(&token, free);
+		ft_lstclear(&cmd, free);
 	}
 }

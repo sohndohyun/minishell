@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:24 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/26 19:39:52 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/28 23:01:16 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ t_list	*to_cmd(t_list *token)
 	t_list	*list;
 	t_cmd	*temp;
 	int		flag;
-
 
 	flag = 1;
 	list = NULL;

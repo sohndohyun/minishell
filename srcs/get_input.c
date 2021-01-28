@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:24:28 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/22 13:37:53 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/28 17:48:18 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,9 @@ void	catch_ctrld(char **line)
 	free(line_buf);
 }
 
-void	trim_input(char **line)
-{
-	char	*temp;
-
-	if (*line != NULL)
-	{
-		temp = ft_strtrim(*line, " ");
-		free(*line);
-		*line = temp;
-	}
-}
-
 int		get_input(char **line)
 {
 	catch_ctrld(line);
-	trim_input(line);
 	if (*line == NULL || ft_strcmp(*line, "") == 0)
 	{
 		free(*line);
