@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/26 21:55:53 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/28 23:10:26 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int				has_empty_command(char **command);
 int				is_semicolon_syntax_error(char **command, char *line);
 t_list*			to_cmd(t_list *token);
 t_list*			to_token(char *str);
-void			run_cmd(t_cmd *cmd);
+int			run_cmd(t_cmd *cmd);
 void			fork_cmd(t_list *cmd_list);
 void	ft_env(t_list *env);
 void	ft_echo(char **argv);
