@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/29 04:19:32 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/29 15:51:35 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,15 @@ void	print_list(t_list *cmd)
 	{
 		print_cmd(cmd->content);
 		cmd = cmd->next;
+	}
+}
+
+void	print_token(t_list *token)
+{
+	while (token)
+	{
+		printf("%s\n", token->content);
+		token = token->next;
 	}
 }
 
