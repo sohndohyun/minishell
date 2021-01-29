@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/26 21:55:53 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/29 15:06:58 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct	s_env
 
 # define CT_NORM 1
 # define CT_PIPE 2
+# define TRUE 1
+# define FALSE 2
 
 typedef struct	s_cmd
 {
@@ -34,6 +36,17 @@ typedef struct	s_cmd
 	char		**argv;
 	int			pfd[2][2];
 }				t_cmd;
+
+typedef struct	s_token_env
+{
+	int			status;
+	char		*key;
+	char		*value;
+	int			value_len;
+	int			idx;
+	int			cmd_i;
+	t_env		*env;
+}				t_token_env;
 
 int				ascii_art(void);
 void			print_prompt(void);
@@ -65,6 +78,8 @@ void	add_env(t_list *env, char *key, char *value);
 void	modify_value(t_env *env, char *value);
 void	modify_env(t_list *env, char *key, char *value);
 int		run_cmd_builtin(t_cmd *cmd);
+char	**ft_split_token(char *str, char *set);
+t_list			*to_token_in_token(char *str);
 
 extern t_list		*g_env;
 
