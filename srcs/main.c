@@ -117,12 +117,10 @@ int		main(int argc, char **argv, char **envp)
 		if (!get_input(&line))
 			continue ; //nothing input!
 		if (!(token = to_token(line)) || !(cmd = to_cmd(token)))
-		{
-			write(1, "minishell: syntax error!\n", 25);
 			continue ; //syntax error! 
-		}
+		print_list(cmd);
 		fork_cmd(cmd);
 		ft_lstclear(&token, free);
-		ft_lstclear(&cmd, free);
+		ft_lstclear(&cmd, free_cmd);
 	}
 }

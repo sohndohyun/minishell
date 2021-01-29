@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:53:04 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/29 15:51:01 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/29 03:10:45 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int		find_token_length(char *str)
 {
 	int		imsi;
 
-	if (ft_strncmp(str, "<<", 2) == 0)
+	if (ft_strncmp(str, "<<", 2) == 0 || ft_strncmp(str, ">>", 2) == 0)
 		return (2);
 	else if (*str == '<' || *str == '|' || *str == '>' || *str == ';')
 		return (1);
@@ -195,6 +195,7 @@ t_list			*to_token(char *str)
 			if (token_len == -1)
 			{
 				ft_lstclear(&list, free);
+				ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
 				return (NULL);
 			}
 			temp = malloc(token_len + 1);

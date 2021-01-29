@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 12:16:55 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/28 23:20:56 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/29 19:02:38 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,39 @@ void fork_cmd(t_list *cmd_list)
 {
 	t_cmd	*cmd;
 	int		status;
+	int		save_in;
+	int		save_out;
 
 	set_cmd_pfd(cmd_list);
 	while (cmd_list)
 	{
+		save_in = -1;
+		save_out = -1;
 		cmd = cmd_list->content;
+		if (cmd->fd_in != 0)
+		{
+			save_in = dup(0);
+			dup2(cmd->fd_in, 0);
+		}
+		if (cmd->fd_out != 1)
+		{
+			save_out = dup(1);
+			dup2(cmd->fd_out, 1);
+		}
 		if (!run_cmd_builtin(cmd))
 		{
 			status = run_cmd(cmd);
 			// status 처리
+		}
+		if (save_in != -1)
+		{
+			close(cmd->fd_in);
+			dup2(save_in, 0);
+		}
+		if (save_out != -1)
+		{
+			close(cmd->fd_out);
+			dup2(save_out, 1);
 		}
 		cmd_list = cmd_list->next;
 	}
