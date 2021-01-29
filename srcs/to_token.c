@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:53:04 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/29 15:47:58 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/29 15:51:01 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,11 @@ t_list			*to_token(char *str)
 		else
 		{
 			token_len = find_token_length(str);
+			if (token_len == -1)
+			{
+				ft_lstclear(&list, free);
+				return (NULL);
+			}
 			temp = malloc(token_len + 1);
 			temp[token_len] = '\0';
 			ft_strlcpy(temp, str, token_len + 1);
