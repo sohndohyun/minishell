@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 12:16:55 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/29 19:02:38 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/31 04:00:56 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ void fork_cmd(t_list *cmd_list)
 			save_out = dup(1);
 			dup2(cmd->fd_out, 1);
 		}
-		if (!run_cmd_builtin(cmd))
-		{
-			status = run_cmd(cmd);
-			// status 처리
-		}
+		if (is_cmd_builtin(cmd->argv[0]))
+			status = run_cmd_builtin(cmd);
+		else
+			status = run_cmd(cmd, run_cmd_execve);
+
 		if (save_in != -1)
 		{
 			close(cmd->fd_in);
