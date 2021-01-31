@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:58:52 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/26 20:13:21 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/31 11:11:47 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_pwd(void)
 	char	dir[4096];
 
 	if (getcwd(dir, 4096) == NULL)
-		print_error("pwd", errno);
+		print_error("pwd", errno, strerror(errno));
 	else
 		ft_putendl_fd(dir, STDOUT_FILENO);
 }

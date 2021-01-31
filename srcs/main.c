@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/29 21:00:59 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/31 11:14:07 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,13 @@ t_list		*get_env(char **envp)
 		env->value = ft_substr(*envp, pos + 1, ft_strlen(*envp) - pos - 1);
 		ft_lstadd_back(&envs, ft_lstnew(env));
 		envp++;
+	}
+	if (search_env(envs, "OLDPWD") == NULL)
+	{
+		env = (t_env *)malloc(sizeof(t_env));
+		env->key = ft_strdup("OLDPWD");
+		env->value = NULL;
+		ft_lstadd_back(&envs, ft_lstnew(env));
 	}
 	return (envs);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:48:48 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/29 03:12:28 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/31 11:11:34 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ void	set_pwd(t_list *env)
 
 	oldpwd = search_env(env, "OLDPWD");
 	pwd = search_env(env, "PWD");
-
-	if (oldpwd == NULL)
-		add_env(env, ft_strdup("OLDPWD"), ft_strdup(pwd->value));
 	getcwd(dir, 4096);
+	modify_env(env, "OLDPWD", ft_strdup(pwd->value));
 	modify_env(env, "PWD", ft_strdup(dir));
 }
 
@@ -37,7 +35,7 @@ void	ft_cd(char **argv)
 	{
 		if ((err_msg = ft_strjoin("cd: ", argv[1])) == NULL)
 			return ;
-		print_error(err_msg, errno);
+		print_error(err_msg, errno, strerror(errno));
 		errno = 1;
 		free(err_msg);
 	}
