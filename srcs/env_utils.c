@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:55:10 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/30 23:27:08 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/31 12:29:42 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ void	free_env(void *value)
 	if (!env)
 		return ;
 	if (!env->key)
-		return ;
-	if (!env->value)
 		return ;
 	free(env->key);
 	free(env->value);

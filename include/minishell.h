@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/31 10:10:52 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/31 13:19:33 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void			ft_env(t_list *env);
 void			ft_echo(char **argv);
 void			ft_pwd(void);
 void			ft_cd(char **argv);
-void			print_error(char *msg, int errnum);
+void			print_error(char *msg, int errnum, char *err_val);
 int				is_equal_key(t_env *env, char *key);
 t_env			*search_env(t_list *env, char *key);
 t_env			*new_env(char *key, char *value);
@@ -93,6 +93,12 @@ void	free_env(void *value);
 void	*ft_env_dup(void *ref);
 char	   		**ft_split_token(char *str, char *set);
 t_list			*to_token_in_token(char *str);
+int		ft_env_cmp(void *r1, void *r2);
+t_list	*ft_list_dup(t_list *lst, void *(*dup)(void *));
+t_list	*ft_list_sort(t_list *lst, int (*cmp)(void *, void *));
+int				is_valid_env_key(char *key);
+void		ft_unset(char **argv);
+int					ft_exit(char **argv);
 
 
 extern t_list		*g_env;

@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 14:06:48 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/31 10:08:38 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/31 12:35:56 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,59 @@ void	show_all_env(t_list *envs)
 	}
 }
 
-int			check_equation(int *pos, char *str)
+int			check_first_equal_char(int *pos, char *str)
 {
 	*pos = 0;
 	while (str[*pos] != '=' && str[*pos] != '\0')
 		(*pos)++;
 	if (*pos == 0)
-		return (FALSE);
-	return (TRUE);
+		return (0);
+	return (1);
+}
+
+int				is_valid_env_key(char *key)
+{
+	int			is_first;
+
+	if (!key)
+		return (0);
+	is_first = 1;
+	while (*key)
+	{
+		if (is_first == 1 && ft_isdigit(*key))
+			return (0);
+		if (!ft_isalnum(*key) && *key != '_')
+		{
+			if (*key == '+' && *(key + 1) == '\0')
+				return (1);
+			return (0);
+		}
+		key++;
+		is_first = 0;
+	}
+	return (1);
+}
+
+static void	print_export_error(char *equation)
+{
+	char	*temp;
+	char	*err_msg;
+
+	errno = 1;
+	if ((temp = ft_strjoin("export: `", equation)) == NULL)
+		return ;
+	err_msg = ft_strjoin_free_s1(temp, "\'");
+	if (err_msg == NULL)
+		return ;
+	print_error(err_msg, -1, "not a valid identifier");
+	free(err_msg);
 }
 
 void	ft_export(char **argv)
 {
 	t_list	*dup;
-	t_env	*new;
 	char	*key;
+	char	*value;
 	int		pos;
 
 	dup = ft_list_dup(g_env, ft_env_dup);
@@ -62,21 +100,24 @@ void	ft_export(char **argv)
 	{
 		while (*argv)
 		{
-			if (is_valid_env_name(&pos, *argv) == FALSE)
+			if (!check_first_equal_char(&pos, *argv))
 			{
 				print_export_error(*argv);
 				argv++;
 				continue;
 			}
-			key = ft_strndup(*argv, pos);
-			if (env_valid_name(key, TRUE))
-				envlst_append(lst, name, *target, locate);
+			key = ft_substr(*argv, 0, pos);
+			if (is_valid_env_key(key))
+			{
+				if (ft_strchr(*argv, '='))
+					value = ft_substr(*argv, pos + 1, ft_strlen(*argv) - pos - 1);
+				else
+					value = NULL;
+				add_env(g_env, key, value);
+			}
 			else
-				export_error_handling(*target);
-			if (ft_strequ(name, ENV_PATH) || ft_strequ(name, ENV_PATH_WITHPLUS))
-				reset_path(path, *lst);
-			free_str(&name);
-			target++;
+				print_export_error(*argv);
+			argv++;
 		}
 	}
 	ft_lstclear(&dup, free_env);

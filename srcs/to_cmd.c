@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:24 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/29 15:15:03 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/31 11:12:53 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	**parse_argv(t_list **token, t_cmd *cmd)
 			{
 				free(argv);
 				ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
-				print_error((*token)->next->content, 2);
+				print_error((*token)->next->content, 2, strerror(2));
 				return (NULL);
 			}
 			(*token) = (*token)->next->next;
