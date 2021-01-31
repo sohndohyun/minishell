@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:24 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/31 11:12:53 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/31 16:22:54 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,7 @@ int		parse_type(t_list **token, int flag)
 void	free_cmd(void *value)
 {
 	t_cmd *cmd;
-	int i;
 
-	i = -1;
 	cmd = value;
 	if (!cmd)
 		return ;

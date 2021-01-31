@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 17:12:36 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/26 19:41:30 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/31 16:45:33 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ void	ft_echo(char **argv)
 	}
 	if (op_n == 1)
 		ft_putstr_fd("\n", STDOUT_FILENO);
+	errno = 0;
 }

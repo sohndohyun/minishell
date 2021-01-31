@@ -64,12 +64,12 @@ void			trim_input(char **line);
 void			ft_free_2d_arr(void	 **ptr);
 int				has_empty_command(char **command);
 int				is_semicolon_syntax_error(char **command, char *line);
-t_list*			to_cmd(t_list *token);
+t_list			*to_cmd(t_list *token);
 void			free_cmd(void *value);
 int				is_redirection(char *str);
 int				to_cmd_redirection_error(t_list *token);
 int				to_cmd_redirection(char *type, char *value, t_cmd *cmd);
-t_list*			to_token(char *str);
+t_list			*to_token(char *str);
 char			*token_switch(char *token);
 int				run_cmd(t_cmd *cmd, int (*run_cmd_type)(t_cmd*));
 void			fork_cmd(t_list *cmd_list);
@@ -87,22 +87,23 @@ void			add_env(t_list *env, char *key, char *value);
 void			modify_value(t_env *env, char *value);
 void			modify_env(t_list *env, char *key, char *value);
 int				run_cmd_builtin(t_cmd *cmd);
-char	    **ft_split_token(char *str, char *set);
-t_list		*to_token_in_token(char *str);
-void	ft_export(char **argv);
-void	free_env(void *value);
-void	*ft_env_dup(void *ref);
-char	   		**ft_split_token(char *str, char *set);
+char			**ft_split_token(char *str, char *set);
 t_list			*to_token_in_token(char *str);
-int		ft_env_cmp(void *r1, void *r2);
-t_list	*ft_list_dup(t_list *lst, void *(*dup)(void *));
-t_list	*ft_list_sort(t_list *lst, int (*cmp)(void *, void *));
+void			ft_export(char **argv);
+void			free_env(void *value);
+void			*ft_env_dup(void *ref);
+char			**ft_split_token(char *str, char *set);
+t_list			*to_token_in_token(char *str);
+int				ft_env_cmp(void *r1, void *r2);
+t_list			*ft_list_dup(t_list *lst, void *(*dup)(void *));
+t_list			*ft_list_sort(t_list *lst, int (*cmp)(void *, void *));
 int				is_valid_env_key(char *key);
-void		ft_unset(char **argv);
-int					ft_exit(char **argv);
+void			ft_unset(char **argv);
+int				ft_exit(char **argv);
+void			ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
 
 
-extern t_list		*g_env;
+extern t_list	*g_env;
 
 #include <stdio.h>
 

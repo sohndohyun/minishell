@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 14:06:48 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/31 12:35:56 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/31 14:41:16 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,38 @@ static void	print_export_error(char *equation)
 	free(err_msg);
 }
 
+void	ft_export_add_env(char **argv)
+{
+	int		pos;
+	char	*key;
+	char	*value;
+	
+	while (*argv)
+	{
+		if (!check_first_equal_char(&pos, *argv))
+		{
+			print_export_error(*argv);
+			argv++;
+			continue;
+		}
+		key = ft_substr(*argv, 0, pos);
+		if (is_valid_env_key(key))
+		{
+			if (ft_strchr(*argv, '='))
+				value = ft_substr(*argv, pos + 1, ft_strlen(*argv) - pos - 1);
+			else
+				value = NULL;
+			add_env(g_env, key, value);
+		}
+		else
+			print_export_error(*argv);
+		argv++;
+	}
+}
+
 void	ft_export(char **argv)
 {
 	t_list	*dup;
-	char	*key;
-	char	*value;
-	int		pos;
 
 	dup = ft_list_dup(g_env, ft_env_dup);
 	ft_list_sort(dup, ft_env_cmp);
@@ -97,28 +123,6 @@ void	ft_export(char **argv)
 	if (*argv == NULL)
 		show_all_env(dup);
 	else
-	{
-		while (*argv)
-		{
-			if (!check_first_equal_char(&pos, *argv))
-			{
-				print_export_error(*argv);
-				argv++;
-				continue;
-			}
-			key = ft_substr(*argv, 0, pos);
-			if (is_valid_env_key(key))
-			{
-				if (ft_strchr(*argv, '='))
-					value = ft_substr(*argv, pos + 1, ft_strlen(*argv) - pos - 1);
-				else
-					value = NULL;
-				add_env(g_env, key, value);
-			}
-			else
-				print_export_error(*argv);
-			argv++;
-		}
-	}
+		ft_export_add_env(argv);
 	ft_lstclear(&dup, free_env);
 }

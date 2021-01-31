@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 01:49:29 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/31 13:19:48 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/31 16:42:59 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,19 @@ int run_cmd_builtin_run(t_cmd *cmd)
 	int	status;
 
 	cmd_len = ft_strlen(cmd->argv[0]);
-	if(ft_strncmp(cmd->argv[0], "cd", cmd_len) == 0)
+	if(ft_strcmp(cmd->argv[0], "cd") == 0)
 		ft_cd(cmd->argv);
-	else if(ft_strncmp(cmd->argv[0], "echo", cmd_len) == 0)
+	else if(ft_strcmp(cmd->argv[0], "echo") == 0)
 		ft_echo(cmd->argv);
-	else if(ft_strncmp(cmd->argv[0], "pwd", cmd_len) == 0)
+	else if(ft_strcmp(cmd->argv[0], "pwd") == 0)
 		ft_pwd();
-	else if(ft_strncmp(cmd->argv[0], "env", cmd_len) == 0)
+	else if(ft_strcmp(cmd->argv[0], "env") == 0)
 		ft_env(g_env);
-	else if(ft_strncmp(cmd->argv[0], "export", cmd_len) == 0)
+	else if(ft_strcmp(cmd->argv[0], "export") == 0)
 		ft_export(cmd->argv);
-	else if(ft_strncmp(cmd->argv[0], "unset", cmd_len) == 0)
+	else if(ft_strcmp(cmd->argv[0], "unset") == 0)
 		ft_unset(cmd->argv);
-	else if(ft_strncmp(cmd->argv[0], "exit", cmd_len) == 0)
+	else if(ft_strcmp(cmd->argv[0], "exit") == 0)
 	{
 		if ((status = ft_exit(cmd->argv)) != 1)
 			exit(status);
