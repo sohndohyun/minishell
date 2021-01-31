@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:53:04 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/01 03:26:25 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/01 04:20:57 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,28 +76,33 @@ t_list			*to_token(char *str)
 	t_list	*list;
 	int		token_len;
 	char	*temp;
+	int i;
 
 	list = NULL;
-	while (*str)
+	str = token_switch(str);
+	i = 0;
+	while (str[i])
 	{
-		if (ft_isspace(*str))
-			str++;
+		if (ft_isspace(str[i]))
+			i++;
 		else
 		{
-			token_len = find_token_length(str);
+			token_len = find_token_length(str + i);
 			if (token_len == -1)
 			{
 				ft_lstclear(&list, free);
 				ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
+				free(str);
 				return (NULL);
 			}
 			temp = malloc(token_len + 1);
 			temp[token_len] = '\0';
-			ft_strlcpy(temp, str, token_len + 1);
-			temp = token_switch(temp);
+			ft_strlcpy(temp, str + i, token_len + 1);
+			temp = token_remove_quote(temp);
 			ft_lstadd_back(&list, ft_lstnew(temp));
-			str += token_len;
+			i += token_len;
 		}
 	}
+	free(str);
 	return (list);
 }

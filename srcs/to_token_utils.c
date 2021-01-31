@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 21:52:37 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/01 03:50:35 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/01 04:07:45 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,5 @@ char	*token_switch(char *token)
 			it++;
 	}
 	ret = ft_strjoin_free_s1(ret, save);
-	free(token);
-	return (token_remove_quote(ret));
+	return (ret);
 }
