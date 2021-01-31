@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 19:11:54 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/31 11:10:47 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/31 14:29:13 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,3 @@ void	print_error(char *msg, int errnum, char *err_val)
 	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putendl_fd(err_val, STDERR_FILENO);
 }
-

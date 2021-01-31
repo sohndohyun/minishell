@@ -20,6 +20,8 @@ SRCS= srcs/main.c \
 		srcs/ft_unset.c \
 		srcs/env_utils.c \
 		srcs/error.c \
+		srcs/env_utils2.c \
+		srcs/lst_utils.c \
 		srcs/to_cmd_redirection.c
 
 HEADER= -I./include/. -I./libft/.

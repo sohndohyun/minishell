@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:53:04 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/29 03:10:45 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/31 16:41:30 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ void			refine_token(t_list **begin_list)
 			new_token->next = curr->next;
 			free(curr);
 			curr = new_token;
+			free(temp);
 		}
 		prev = curr;
 		curr = curr->next;
