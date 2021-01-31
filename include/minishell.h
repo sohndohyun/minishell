@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/29 15:51:58 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/01/30 23:27:11 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ void			modify_env(t_list *env, char *key, char *value);
 int				run_cmd_builtin(t_cmd *cmd);
 char	    **ft_split_token(char *str, char *set);
 t_list		*to_token_in_token(char *str);
-
+void	ft_export(char **argv);
+void	free_env(void *value);
+void	*ft_env_dup(void *ref);
 
 extern t_list		*g_env;
 

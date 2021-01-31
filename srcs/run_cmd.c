@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 01:49:29 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/29 17:15:25 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/01/30 23:06:46 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int run_cmd_builtin(t_cmd *cmd)
 	else if(ft_strncmp(cmd->argv[0], "env", cmd_len) == 0)
 		ft_env(g_env);
 	else if(ft_strncmp(cmd->argv[0], "export", cmd_len) == 0)
-		printf("TODO: %s\n", cmd->argv[0]);
+		ft_export(cmd->argv);
 	else if(ft_strncmp(cmd->argv[0], "unset", cmd_len) == 0)
 		printf("TODO: %s\n", cmd->argv[0]);
 	else if(ft_strncmp(cmd->argv[0], "exit", cmd_len) == 0)
