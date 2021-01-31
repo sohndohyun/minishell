@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/31 16:48:43 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/01 03:23:56 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int				is_redirection(char *str);
 int				to_cmd_redirection_error(t_list *token);
 int				to_cmd_redirection(char *type, char *value, t_cmd *cmd);
 t_list			*to_token(char *str);
+char			*token_switch(char *token);
 int				run_cmd(t_cmd *cmd, int (*run_cmd_type)(t_cmd*));
 void			fork_cmd(t_list *cmd_list);
 int				run_cmd_execve(t_cmd *cmd);

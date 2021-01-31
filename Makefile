@@ -7,6 +7,7 @@ SRCS= srcs/main.c \
 		srcs/get_input.c \
 		srcs/signal_handle.c \
 		srcs/to_token.c \
+		srcs/to_token_utils.c \
 		srcs/to_cmd.c \
 		srcs/utils.c \
 		srcs/run_cmd.c \
