@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/01 19:36:36 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/02 00:25:09 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ int				run_cmd(t_cmd *cmd, int (*run_cmd_type)(t_cmd*));
 void			fork_cmd(t_list *cmd_list);
 int				run_cmd_execve(t_cmd *cmd);
 int				is_cmd_builtin(char *cmd);
-void			ft_env(t_list *env);
-void			ft_echo(char **argv);
-void			ft_pwd(void);
-void			ft_cd(char **argv);
+int				ft_env(t_list *env);
+int				ft_echo(char **argv);
+int				ft_pwd(void);
+int				ft_cd(char **argv);
 void			print_error(char *msg, int errnum, char *err_val);
 int				is_equal_key(t_env *env, char *key);
 t_env			*search_env(t_list *env, char *key);
@@ -90,7 +90,7 @@ void			modify_env(t_list *env, char *key, char *value);
 int				run_cmd_builtin(t_cmd *cmd);
 char			**ft_split_token(char *str, char *set);
 t_list			*to_token_in_token(char *str);
-void			ft_export(char **argv);
+int				ft_export(char **argv);
 void			free_env(void *value);
 void			*ft_env_dup(void *ref);
 char			**ft_split_token(char *str, char *set);
@@ -99,10 +99,12 @@ int				ft_env_cmp(void *r1, void *r2);
 t_list			*ft_list_dup(t_list *lst, void *(*dup)(void *));
 t_list			*ft_list_sort(t_list *lst, int (*cmp)(void *, void *));
 int				is_valid_env_key(char *key);
-void			ft_unset(char **argv);
+int				ft_unset(char **argv);
 int				ft_exit(char **argv);
 void			ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
 int				ft_nbr_length(int n);
+void			handle_signal_main(int signo);
+void			handle_signal_chlid(int signo);
 
 extern t_list	*g_env;
 

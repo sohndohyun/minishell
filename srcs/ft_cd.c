@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:48:48 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/31 14:29:23 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/02 00:26:17 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,21 @@ void	set_pwd(t_list *env)
 	modify_env(env, "PWD", ft_strdup(dir));
 }
 
-void	ft_cd(char **argv)
+int		ft_cd(char **argv)
 {
 	char	*err_msg;
 
 	if (argv == NULL || argv[1] == NULL)
-		return ;
+		return (1);
 	if (chdir(argv[1]) == -1)
 	{
 		if ((err_msg = ft_strjoin("cd: ", argv[1])) == NULL)
-			return ;
+			return (1);
 		print_error(err_msg, errno, strerror(errno));
 		errno = 1;
 		free(err_msg);
+		return (errno);
 	}
 	set_pwd(g_env);
+	return (0);
 }

@@ -1,6 +1,6 @@
 NAME=minishell
 CC=gcc
-FLAG=-Wall -Wextra -Werror -g3 -fsanitize=address
+FLAG=-Wall -Wextra -Werror
 LIBFT=./libft/libft.a
 SRCS= srcs/main.c \
 		srcs/print_prompt.c \
