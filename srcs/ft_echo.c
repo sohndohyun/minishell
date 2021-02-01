@@ -6,13 +6,13 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 17:12:36 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/01 20:06:28 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/02 00:27:04 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_echo(char **argv)
+int		ft_echo(char **argv)
 {
 	int		i;
 	int		op_n;
@@ -20,7 +20,7 @@ void	ft_echo(char **argv)
 	if (argv== NULL || argv[1] == NULL)
 	{
 		ft_putendl_fd("", STDOUT_FILENO);
-		return ;
+		return (0);
 	}
 	op_n = 1;
 	while (ft_strcmp(argv[op_n], "-n") == 0)
@@ -34,5 +34,5 @@ void	ft_echo(char **argv)
 	}
 	if (op_n == 1)
 		ft_putstr_fd("\n", STDOUT_FILENO);
-	errno = 0;
+	return (errno = 0);
 }

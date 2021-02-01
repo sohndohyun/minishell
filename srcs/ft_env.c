@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:59:43 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/31 16:45:39 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/02 00:42:53 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_env(t_env *env)
 	}
 }
 
-void	ft_env(t_list *env)
+int		ft_env(t_list *env)
 {
 	while (env)
 	{
@@ -30,5 +30,5 @@ void	ft_env(t_list *env)
 			print_env(env->content);
 		env = env->next;
 	}
-	errno = 0;
+	return (errno = 0);
 }
