@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:53:04 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/01 04:20:57 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/01 19:51:02 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ t_list			*to_token(char *str)
 			{
 				ft_lstclear(&list, free);
 				ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
+				errno = 258;
 				free(str);
 				return (NULL);
 			}

@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 12:35:01 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/31 14:30:02 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/01 20:09:54 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int					ft_exit(char **argv)
 
 	ft_putendl_fd("exit", STDOUT_FILENO);
 	argv++;
+	if (*argv == NULL)
+		return (0);
 	test = *argv;
 	while (*test)
 	{

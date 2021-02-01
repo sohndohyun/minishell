@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_token_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 21:52:37 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/01 04:07:45 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/01 19:48:07 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	get_key_length(char *key)
 	int i;
 
 	i = 0;
+	if (ft_strcmp(key, "?") == 0)
+		return (ft_nbr_length(errno));
 	while (ft_isalnum(key[i]) || key[i] == '_')
 		i++;
 	return (i);
@@ -27,6 +29,8 @@ char *find_value(char *str, int n)
 	char *key;
 	t_env *env;
 
+	if (ft_strcmp(str, "?") == 0)
+		return (ft_itoa(errno));
 	key = malloc(n + 1);
 	key[n] = 0;
 	ft_memcpy(key, str, n);
@@ -34,7 +38,7 @@ char *find_value(char *str, int n)
 	if (!env)
 		return (NULL);
 	free(key);
-	return (env->value);
+	return (ft_strdup(env->value));
 }
 
 char *token_remove_quote(char *token)
@@ -92,6 +96,7 @@ char	*token_switch(char *token)
 			keysize = get_key_length(it);
 			save = find_value(it, keysize);
 			ret = save ? ft_strjoin_free_s1(ret, save) : ret;
+			free(save);
 			it += keysize;
 			save = it;
 		}

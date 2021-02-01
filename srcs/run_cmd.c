@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 01:49:29 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/31 16:42:59 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/01 20:17:09 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int is_cmd_builtin(char *cmd)
 {
 	int cmd_len;
 
+	printf("|%s|\n", cmd);
 	cmd_len = ft_strlen(cmd);
 	if(ft_strncmp(cmd, "cd", cmd_len) == 0 || ft_strncmp(cmd, "echo", cmd_len) == 0
 	 || ft_strncmp(cmd, "pwd", cmd_len) == 0 || ft_strncmp(cmd, "env", cmd_len) == 0
@@ -137,11 +138,13 @@ int run_cmd_execve(t_cmd *cmd)
 	if (!path)
 	{
 		ft_putendl_fd("minishell: command not found", STDERR_FILENO);
+		errno = 127;
 		return (1);
 	}
 	envp = get_envp(g_env);
 	execve(path, cmd->argv, envp);
 	ft_putendl_fd("minishell: command not found", STDERR_FILENO);
+	errno = 127;
 	return (1);
 }
 

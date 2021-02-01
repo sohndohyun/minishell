@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:24 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/31 16:22:54 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/01 19:50:51 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	**parse_argv(t_list **token, t_cmd *cmd)
 	if (len == -1)
 	{
 		ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
+		errno = 258;
 		return (NULL);
 	}
 	argv = malloc(sizeof(char *) * (len + 1));
@@ -60,6 +61,7 @@ char	**parse_argv(t_list **token, t_cmd *cmd)
 			{
 				free(argv);
 				ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
+				errno = 258;
 				print_error((*token)->next->content, 2, strerror(2));
 				return (NULL);
 			}
