@@ -3,23 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   to_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:24 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/01 19:50:51 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/02 20:21:24 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		is_type_token(char *str)
+{
+	return (ft_strcmp(str, "|") == 0 || ft_strcmp(str, ";") == 0);
+}
 
 int		get_argv_len(t_list *token)
 {
 	int i;
 
 	i = 0;
-	while (token
-	&& ft_strcmp(token->content, "|") != 0
-	&& ft_strcmp(token->content, ";") != 0)
+	while (token && !is_type_token(token->content))
 	{
 		if (is_redirection((token)->content))
 		{
@@ -41,7 +44,7 @@ char	**parse_argv(t_list **token, t_cmd *cmd)
 	int		len;
 
 	if (*token == NULL)	
-		return (0);
+		return (NULL);
 	i = 0;
 	len = get_argv_len(*token);
 	if (len == -1)
@@ -51,9 +54,7 @@ char	**parse_argv(t_list **token, t_cmd *cmd)
 		return (NULL);
 	}
 	argv = malloc(sizeof(char *) * (len + 1));
-	while (*token
-	&& ft_strcmp((*token)->content, "|") != 0
-	&& ft_strcmp((*token)->content, ";") != 0)
+	while (*token && !is_type_token((*token)->content))
 	{
 		if (is_redirection((*token)->content))
 		{
@@ -86,11 +87,17 @@ int		parse_type(t_list **token, int flag)
 		return (0);
 	if (flag == 1)
 		return (';');	
-	if (ft_strcmp((*token)->content, "|") == 0
-	|| ft_strcmp((*token)->content, ";") == 0)
+	if (is_type_token((*token)->content))
 	{
 		temp = (*token)->content;
 		type = temp[0];
+	}
+	if (!(*token)->next && type == ';')
+		return (0);
+	if ((*token)->next && is_type_token((*token)->next->content))
+	{
+		ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
+		return (-1);
 	}
 	(*token) = (*token)->next;
 	return (type);
@@ -101,12 +108,10 @@ void	free_cmd(void *value)
 	t_cmd *cmd;
 
 	cmd = value;
-	if (!cmd)
-		return ;
-	if (!cmd->argv)
-		return ;
-	free(cmd->argv);
-	free(cmd);
+	if (cmd && cmd->argv)
+		free(cmd->argv);
+	if (cmd)
+		free(cmd);
 }
 
 static void	init_cmd(t_cmd *cmd)
@@ -134,6 +139,17 @@ t_list	*to_cmd(t_list *token)
 		temp = malloc(sizeof(t_cmd));
 		init_cmd(temp);
 		temp->type = parse_type(&token, flag);
+		if (temp->type == 0)
+		{
+			free_cmd(temp);
+			return (list);
+		}
+		else if (temp->type == -1)
+		{
+			free_cmd(temp);
+			ft_lstclear(&list, free_cmd);
+			return (NULL);
+		}
 		temp->argv = parse_argv(&token, temp);
 		if (temp->argv == NULL)
 		{
