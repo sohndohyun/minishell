@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:53:04 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/01 04:20:57 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/02 12:34:36 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int		find_token_length(char *str)
 {
 	if (ft_strncmp(str, "<<", 2) == 0 || ft_strncmp(str, ">>", 2) == 0)
 		return (2);
-	else if (*str == '<' || *str == '|' || *str == '>' || *str == ';')
+	else if (*str == '<' || *str == '|' || *str == '>')
 		return (1);
 	return (find_token_non_end(str));
 }
