@@ -50,6 +50,7 @@ char	**parse_argv(t_list **token, t_cmd *cmd)
 	if (len == -1)
 	{
 		ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
+		errno = 258;
 		return (NULL);
 	}
 	argv = malloc(sizeof(char *) * (len + 1));
@@ -61,6 +62,7 @@ char	**parse_argv(t_list **token, t_cmd *cmd)
 			{
 				free(argv);
 				ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
+				errno = 258;
 				print_error((*token)->next->content, 2, strerror(2));
 				return (NULL);
 			}

@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:27:06 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/29 14:55:06 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/01 19:36:22 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,20 @@ int		get_word_count(char *str, char *set)
 	return (cnt);
 }
 
+int		ft_nbr_length(int n)
+{
+	int i;
+
+	i = 0;
+	if (n <= 0)
+		i++;
+	while (n != 0)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
+}
 char	**ft_split_token(char *str, char *set)
 {
 	char	**result;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 12:16:55 by dsohn             #+#    #+#             */
-/*   Updated: 2021/01/31 04:00:56 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/02 00:37:46 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void fork_cmd(t_list *cmd_list)
 	int		save_out;
 
 	set_cmd_pfd(cmd_list);
+	signal(SIGINT, handle_signal_chlid);
 	while (cmd_list)
 	{
 		save_in = -1;
@@ -64,7 +65,6 @@ void fork_cmd(t_list *cmd_list)
 			status = run_cmd_builtin(cmd);
 		else
 			status = run_cmd(cmd, run_cmd_execve);
-
 		if (save_in != -1)
 		{
 			close(cmd->fd_in);
@@ -77,4 +77,5 @@ void fork_cmd(t_list *cmd_list)
 		}
 		cmd_list = cmd_list->next;
 	}
+	errno = status;
 }

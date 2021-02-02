@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/01 04:26:33 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/02 01:09:55 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int		setup(void)
 {
 	if (!ascii_art())
 		return (0);
-	signal(SIGINT, (void *)handle_signal);
-	signal(SIGQUIT, (void *)handle_signal);
+	signal(SIGINT, (void *)handle_signal_main);
+	signal(SIGQUIT, (void *)handle_signal_main);
 	return (1);
 }
 
@@ -120,13 +120,15 @@ int		main(int argc, char **argv, char **envp)
 	g_env = env;
 	while (1)
 	{
+		signal(SIGINT, (void *)handle_signal_main);
+		signal(SIGQUIT, (void *)handle_signal_main);
 		print_prompt();
 		if (!get_input(&line))
 			continue ; //nothing input!
 		if (!(token = to_token(line)) || !(cmd = to_cmd(token)))
 			continue ; //syntax error! 
 		free(line);
-		print_token(token);
+		// print_token(token);
 		fork_cmd(cmd);
 		ft_lstclear(&token, free);
 		ft_lstclear(&cmd, free_cmd);
