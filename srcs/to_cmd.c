@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:24 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/02 20:21:24 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/03 03:56:52 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int		is_type_token(char *str)
 {
-	return (ft_strcmp(str, "|") == 0 || ft_strcmp(str, ";") == 0);
+	return (ft_strcmp(str, "|") == 0 || ft_strcmp(str, ";") == 0
+	|| ft_strcmp(str, "&&") == 0 || ft_strcmp(str, "||") == 0);
 }
 
 int		get_argv_len(t_list *token)
@@ -86,13 +87,20 @@ int		parse_type(t_list **token, int flag)
 	if (*token == NULL)	
 		return (0);
 	if (flag == 1)
-		return (';');	
+		return (CT_NORM);	
 	if (is_type_token((*token)->content))
 	{
 		temp = (*token)->content;
-		type = temp[0];
+		if (ft_strcmp(temp, "||") == 0)
+			type = CT_OR;
+		else if (ft_strcmp(temp, "&&") == 0)
+			type = CT_AND;
+		else if (ft_strcmp(temp, "|") == 0)
+			type = CT_PIPE;
+		else
+			type = CT_NORM;
 	}
-	if (!(*token)->next && type == ';')
+	if (!(*token)->next && type == CT_NORM)
 		return (0);
 	if ((*token)->next && is_type_token((*token)->next->content))
 	{
