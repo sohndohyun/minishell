@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:53:04 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/02 12:34:36 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/03 03:55:57 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ static int		find_next_ch(char *str, char c)
 	return (-1);
 }
 
-static int		need_seperate(char c)
+static int		need_seperate(char *c)
 {
-	return (ft_isspace(c) || c == '<' || c == '>'
-			|| c == '|' || c == ';');
+	return (ft_isspace(*c) || *c == '<' || *c == '>'
+			|| *c == '|' || *c == ';' || ft_strncmp(c, "&&", 2) == 0);
 }
 
 static int		find_token_non_end(char *str)
@@ -48,7 +48,7 @@ static int		find_token_non_end(char *str)
 		temp = str + 1;
 	while (*temp)
 	{
-		if (need_seperate(*temp) && *(temp - 1) != '\\')
+		if (need_seperate(temp) && *(temp - 1) != '\\')
 			break ;
 		else if ((*temp == '\'' || *temp == '\"') && *(temp - 1) != '\\')
 		{
@@ -64,7 +64,8 @@ static int		find_token_non_end(char *str)
 
 static int		find_token_length(char *str)
 {
-	if (ft_strncmp(str, "<<", 2) == 0 || ft_strncmp(str, ">>", 2) == 0)
+	if (ft_strncmp(str, "<<", 2) == 0 || ft_strncmp(str, ">>", 2) == 0
+	|| ft_strncmp(str, "||", 2) == 0 || ft_strncmp(str, "&&", 2) == 0)
 		return (2);
 	else if (*str == '<' || *str == '|' || *str == '>')
 		return (1);

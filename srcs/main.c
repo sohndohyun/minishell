@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/02 01:09:55 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/03 19:37:36 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	print_cmd(t_cmd *cmd)
 		printf("argv[%d]: %s\n", i, temp[i]);
 		i++;
 	}
-	printf("type: %c\n", cmd->type);
+	printf("type: %d\n", cmd->type);
 }
 
 void	print_list(t_list *cmd)
@@ -126,9 +126,9 @@ int		main(int argc, char **argv, char **envp)
 		if (!get_input(&line))
 			continue ; //nothing input!
 		if (!(token = to_token(line)) || !(cmd = to_cmd(token)))
-			continue ; //syntax error! 
+			continue ; //syntax error!
 		free(line);
-		// print_token(token);
+		print_list(cmd);
 		fork_cmd(cmd);
 		ft_lstclear(&token, free);
 		ft_lstclear(&cmd, free_cmd);
