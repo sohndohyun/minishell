@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/03 03:03:19 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/04 16:23:29 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void			ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void
 int				ft_nbr_length(int n);
 void			handle_signal_main(int signo);
 void			handle_signal_chlid(int signo);
+char			**wildcard(char **argv);
+char			*rd_wildcard(char *str);
 
 extern t_list	*g_env;
 

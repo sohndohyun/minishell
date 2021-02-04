@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:24 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/03 03:56:52 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/04 16:39:09 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,17 @@ char	**parse_argv(t_list **token, t_cmd *cmd)
 		{
 			if (!to_cmd_redirection((*token)->content, (*token)->next->content, cmd))
 			{
+				while (--i >= 0)
+					free(argv[i]);
 				free(argv);
-				ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
-				errno = 258;
+				errno = 2;
 				print_error((*token)->next->content, 2, strerror(2));
 				return (NULL);
 			}
 			(*token) = (*token)->next->next;
 			continue;
 		}
-		argv[i] = (*token)->content;
+		argv[i] = ft_strdup((*token)->content);
 		i++;
 		(*token) = (*token)->next;
 	}
@@ -117,7 +118,7 @@ void	free_cmd(void *value)
 
 	cmd = value;
 	if (cmd && cmd->argv)
-		free(cmd->argv);
+		ft_free_2d_arr((void**)cmd->argv);
 	if (cmd)
 		free(cmd);
 }
@@ -165,6 +166,7 @@ t_list	*to_cmd(t_list *token)
 			ft_lstclear(&list, free_cmd);
 			return (NULL);
 		}
+		temp->argv = wildcard(temp->argv);
 		ft_lstadd_back(&list, ft_lstnew(temp));
 		flag = 0;
 	}

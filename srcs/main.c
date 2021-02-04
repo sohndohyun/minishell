@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/03 19:37:36 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/04 15:34:42 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,9 @@ int		main(int argc, char **argv, char **envp)
 		if (!(token = to_token(line)) || !(cmd = to_cmd(token)))
 			continue ; //syntax error!
 		free(line);
-		print_list(cmd);
-		fork_cmd(cmd);
 		ft_lstclear(&token, free);
+		//print_list(cmd);
+		fork_cmd(cmd);
 		ft_lstclear(&cmd, free_cmd);
 	}
 }
