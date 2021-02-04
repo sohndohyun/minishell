@@ -23,7 +23,8 @@ SRCS= srcs/main.c \
 		srcs/error.c \
 		srcs/env_utils2.c \
 		srcs/lst_utils.c \
-		srcs/to_cmd_redirection.c
+		srcs/to_cmd_redirection.c \
+		srcs/wildcard.c
 
 HEADER= -I./include/. -I./libft/.
 all:
