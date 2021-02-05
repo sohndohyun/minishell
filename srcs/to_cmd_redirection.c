@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 03:13:55 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/05 02:39:37 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/05 12:21:29 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,17 @@ int		here_document(char *value)
 		if (ret)
 		{
 			if (ft_strcmp(value, line) == 0)
+			{
+				free(line);
 				break ;
+			}
 			doc = ft_strjoin_free_s1(doc, line);
+			free(line);
 		}
 		doc = ft_strjoin_free_s1(doc, "\n");
 	}
 	ft_putstr_fd(doc, fds[1]);
+	free(doc);
 	close(fds[1]);
 	return (fds[0]);
 }
