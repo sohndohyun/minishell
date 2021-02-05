@@ -1,10 +1,11 @@
 NAME=minishell
 CC=gcc
-FLAG=-Wall -Wextra -Werror
+FLAG=-Wall -Wextra -Werror -lncurses
 LIBFT=./libft/libft.a
-SRCS= srcs/main.c \
-		srcs/print_prompt.c \
-		srcs/get_input.c \
+SRCS= srcs/main_bonus.c \
+		srcs/cursor.c \
+		srcs/print_prompt_bonus.c \
+		srcs/get_input_bonus.c \
 		srcs/signal_handle.c \
 		srcs/to_token.c \
 		srcs/to_token_utils.c \

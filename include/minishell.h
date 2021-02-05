@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/04 16:23:29 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/05 11:10:21 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,12 @@ void			handle_signal_main(int signo);
 void			handle_signal_chlid(int signo);
 char			**wildcard(char **argv);
 char			*rd_wildcard(char *str);
+void			init_term(void);
+void			init_tc(void);
 
 extern t_list	*g_env;
 
 #include <stdio.h>
+# include "termcaps.h"
 
 #endif
