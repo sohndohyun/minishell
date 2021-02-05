@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/05 12:44:04 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/05 12:04:51 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int		setup(void)
 {
 	if (!ascii_art())
 		return (0);
+	init_term();
 	signal(SIGINT, (void *)handle_signal_main);
 	signal(SIGQUIT, (void *)handle_signal_main);
 	return (1);
@@ -72,38 +73,31 @@ t_list		*get_env(char **envp)
 	return (envs);
 }
 
-void	print_cmd(t_cmd *cmd)
+void	init_term(void)
 {
-	int i;
-	char **temp;
+	t_env	*env;
 
-	i = 0;
-	temp = cmd->argv;
-	while (temp[i])
-	{
-		printf("argv[%d]: %s\n", i, temp[i]);
-		i++;
-	}
-	printf("type: %d\n", cmd->type);
+	if (!(env = search_env(g_env, "TERM")))
+		env->value = "xterm";
+	tgetent(NULL, env->value);
+	setupterm(NULL, STDOUT_FILENO, NULL);
+	tcgetattr(0, &g_tc->term);
+	tcgetattr(0, &g_tc->term_backup);
+	g_tc->term.c_lflag = g_tc->term.c_lflag & ~ICANON;
+	g_tc->term.c_lflag = g_tc->term.c_lflag & ~ECHO;
+	g_tc->term.c_cc[VMIN] = 1;
+	g_tc->term.c_cc[VTIME] = 0;
+	tcsetattr(0, TCSANOW, &g_tc->term);
+	init_tc();
 }
 
-void	print_list(t_list *cmd)
+void	init_tc(void)
 {
-	while (cmd)
-	{
-		print_cmd(cmd->content);
-		cmd = cmd->next;
-	}
+	g_tc->cm = tgetstr("cm", NULL);
+	g_tc->ce = tgetstr("ce", NULL);
+	g_tc->dl = tgetstr("DL", NULL);
 }
 
-void	print_token(t_list *token)
-{
-	while (token)
-	{
-		printf("%s\n", token->content);
-		token = token->next;
-	}
-}
 
 int		main(int argc, char **argv, char **envp)
 {
@@ -111,26 +105,35 @@ int		main(int argc, char **argv, char **envp)
 	t_list	*token;
 	t_list	*cmd;
 	t_list	*env;
+	t_termcap	termcap;
 
 	(void)argc;
 	(void)argv;
-	if (!setup())
-		return (1);
 	env = get_env(envp);
 	g_env = env;
+	g_tc = &termcap;
+	ft_bzero(&termcap, sizeof(t_termcap));
+	if (!setup())
+		return (1);
+	line = NULL;
 	while (1)
 	{
 		signal(SIGINT, (void *)handle_signal_main);
 		signal(SIGQUIT, (void *)handle_signal_main);
+		get_cursor_position(&g_tc->start_col, &g_tc->start_row);
 		print_prompt();
-		if (!get_input(&line))
-			continue ; //nothing input!
-		if (!(token = to_token(line)) || !(cmd = to_cmd(token)))
-			continue ; //syntax error!
-		free(line);
-		ft_lstclear(&token, free);
-		//print_list(cmd);
-		fork_cmd(cmd);
-		ft_lstclear(&cmd, free_cmd);
+		get_cursor_position(&g_tc->col, &g_tc->start_row);
+		g_tc->mod_offset = 0;
+		if (get_input(&line))
+		{
+			tcsetattr(0, TCSANOW, &g_tc->term_backup);
+			add_cmd_to_history(line);
+			if (!(token = to_token(line)) || !(cmd = to_cmd(token)))
+				continue ; //syntax error!
+			ft_free_and_null((void **)&line);
+			ft_lstclear(&token, free);
+			fork_cmd(cmd);
+			ft_lstclear(&cmd, free_cmd);
+		}
 	}
 }
