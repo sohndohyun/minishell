@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 03:13:55 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/04 16:36:13 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/05 12:21:29 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,37 @@ int		to_cmd_redirection_error(t_list *token)
 	return (0);
 }
 
+int		here_document(char *value)
+{
+	char *line;
+	char *doc;
+	int ret;
+	int fds[2];
+
+	pipe(fds);
+	doc = ft_strdup("");
+	while (1)
+	{
+		write(1, "> ", 2);
+		ret = get_input(&line);
+		if (ret)
+		{
+			if (ft_strcmp(value, line) == 0)
+			{
+				free(line);
+				break ;
+			}
+			doc = ft_strjoin_free_s1(doc, line);
+			free(line);
+		}
+		doc = ft_strjoin_free_s1(doc, "\n");
+	}
+	ft_putstr_fd(doc, fds[1]);
+	free(doc);
+	close(fds[1]);
+	return (fds[0]);
+}
+
 int		to_cmd_redirection(char *type, char *value, t_cmd *cmd)
 {
 	char *wc;
@@ -38,8 +69,8 @@ int		to_cmd_redirection(char *type, char *value, t_cmd *cmd)
 		return (0);
 	if (ft_strcmp(type, "<<") == 0)
 	{
-		
-		return (0);
+		cmd->fd_in = here_document(value);
+		return (1);
 	}
 	
 	wc = rd_wildcard(value);
@@ -69,5 +100,4 @@ int		to_cmd_redirection(char *type, char *value, t_cmd *cmd)
 			return (0);
 		return (1);
 	}
-	return (0);
 }
