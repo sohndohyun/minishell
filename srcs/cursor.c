@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 18:25:25 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/05 12:08:03 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/05 23:41:21 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ void	get_cursor_position(int *col, int *rows)
 	int		i;
 	char	buf[255];
 	int		ret;
+	int		temp;
 
 	a = 0;
 	i = 1;
-	write(STDIN_FILENO, "\033[6n", 4);
-	ret = read(STDIN_FILENO, buf, 254);
+	temp = 0;
+	write(0, "\033[6n", 4);
+	ret = read(0, buf, 254);
 	buf[ret] = '\0';
 	while (buf[i])
 	{

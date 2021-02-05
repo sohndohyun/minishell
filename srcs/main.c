@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/05 12:44:04 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/05 14:31:30 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ int		main(int argc, char **argv, char **envp)
 			continue ; //syntax error!
 		free(line);
 		ft_lstclear(&token, free);
-		//print_list(cmd);
 		fork_cmd(cmd);
 		ft_lstclear(&cmd, free_cmd);
 	}
