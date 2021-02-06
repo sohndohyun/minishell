@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 14:15:38 by hyeonski          #+#    #+#             */
-/*   Updated: 2020/10/19 16:42:09 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 20:46:15 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void				*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {
 	unsigned char	*result;
 	unsigned char	*source;
-	size_t	i;
+	size_t			i;
 
 	i = 0;
 	if (dest == NULL && src == NULL)
