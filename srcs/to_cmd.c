@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:24 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/04 16:39:09 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/06 17:12:34 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int		is_type_token(char *str)
 {
 	return (ft_strcmp(str, "|") == 0 || ft_strcmp(str, ";") == 0
-	|| ft_strcmp(str, "&&") == 0 || ft_strcmp(str, "||") == 0);
+	|| ft_strcmp(str, "&&") == 0 || ft_strcmp(str, "||") == 0
+	|| ft_strcmp(str, "(")  == 0 || ft_strcmp(str, ")") == 0);
 }
 
 int		get_argv_len(t_list *token)
@@ -79,37 +80,24 @@ char	**parse_argv(t_list **token, t_cmd *cmd)
 	return (argv);
 }
 
-int		parse_type(t_list **token, int flag)
+void		parse_type_token(t_list **token, t_cmd *cmd)
 {
 	char	*temp;
-	int		type;
 
-	type = 0;
-	if (*token == NULL)	
-		return (0);
-	if (flag == 1)
-		return (CT_NORM);	
-	if (is_type_token((*token)->content))
-	{
-		temp = (*token)->content;
-		if (ft_strcmp(temp, "||") == 0)
-			type = CT_OR;
-		else if (ft_strcmp(temp, "&&") == 0)
-			type = CT_AND;
-		else if (ft_strcmp(temp, "|") == 0)
-			type = CT_PIPE;
-		else
-			type = CT_NORM;
-	}
-	if (!(*token)->next && type == CT_NORM)
-		return (0);
-	if ((*token)->next && is_type_token((*token)->next->content))
-	{
-		ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
-		return (-1);
-	}
+	temp = (*token)->content;
+	if (ft_strcmp(temp, "||") == 0)
+		cmd->type = CT_OR;
+	else if (ft_strcmp(temp, "&&") == 0)
+		cmd->type = CT_AND;
+	else if (ft_strcmp(temp, "|") == 0)
+		cmd->type = CT_PIPE;
+	else if (ft_strcmp(temp, ";") == 0)
+		cmd->type = CT_SEMI;
+	else if (ft_strcmp(temp, "(") == 0)
+		cmd->type = CT_BEGIN;
+	else
+		cmd->type = CT_END;
 	(*token) = (*token)->next;
-	return (type);
 }
 
 void	free_cmd(void *value)
@@ -132,43 +120,90 @@ static void	init_cmd(t_cmd *cmd)
 	cmd->pfd[0][1] = -1;
 	cmd->pfd[1][0] = -1;
 	cmd->pfd[1][1] = -1;
-	cmd->type = ';';
+	cmd->type = CT_CMD;
+}
+
+int check_cmd_bucket(t_list *cmd)
+{
+	int stack;
+	int cur;
+
+	stack = 0;
+	while (cmd)
+	{
+		cur = ((t_cmd*)cmd->content)->type;
+		if (cur == CT_BEGIN)
+			stack++;
+		else if (cur == CT_END)
+		{
+			if (--stack < 0)
+				return (0);
+		}
+		cmd = cmd->next;
+	}
+	if (stack != 0)
+		return (0);
+	return (1);
+}
+
+int	check_cmd_syntax(t_list *cmd)
+{
+	int cur;
+	int next;
+
+	if (!check_cmd_bucket(cmd))
+		return (0);
+	while (cmd)
+	{
+		cur = ((t_cmd*)cmd->content)->type;
+		next = cmd->next ? ((t_cmd*)cmd->next->content)->type : -1;
+		if (cur == CT_CMD && (next == CT_CMD || next == CT_BEGIN))
+			return (0);
+		else if (cur == CT_PIPE && (next != CT_CMD))
+			return (0);
+		else if (cur == CT_SEMI && (next == CT_SEMI || next == CT_PIPE || next == CT_AND || next == CT_OR))
+			return (0);
+		else if ((cur == CT_AND || cur == CT_OR || cur == CT_BEGIN) && (next != CT_CMD && next != CT_BEGIN))
+			return (0);
+		else if (cur == CT_END && (next == CT_CMD || next == CT_PIPE || next == CT_BEGIN))
+			return (0);
+		cmd = cmd->next;
+	}
+	return (1);
 }
 
 t_list	*to_cmd(t_list *token)
 {
 	t_list	*list;
 	t_cmd	*temp;
-	int		flag;
 
-	flag = 1;
 	list = NULL;
 	while (token)
 	{
 		temp = malloc(sizeof(t_cmd));
 		init_cmd(temp);
-		temp->type = parse_type(&token, flag);
-		if (temp->type == 0)
+		if (is_type_token(token->content))
+			parse_type_token(&token, temp);
+		else
 		{
-			free_cmd(temp);
-			return (list);
+			if (!(temp->argv = parse_argv(&token, temp)))
+			{
+				free_cmd(temp);
+				ft_lstclear(&list, free_cmd);
+				ft_lstclear(&token, free);
+				return (NULL);
+			}
+			temp->argv = wildcard(temp->argv);
 		}
-		else if (temp->type == -1)
-		{
-			free_cmd(temp);
-			ft_lstclear(&list, free_cmd);
-			return (NULL);
-		}
-		temp->argv = parse_argv(&token, temp);
-		if (temp->argv == NULL)
-		{
-			free_cmd(temp);
-			ft_lstclear(&list, free_cmd);
-			return (NULL);
-		}
-		temp->argv = wildcard(temp->argv);
 		ft_lstadd_back(&list, ft_lstnew(temp));
-		flag = 0;
+	}
+	if (!check_cmd_syntax(list))
+	{
+		ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
+		errno = 258;
+		ft_lstclear(&list, free_cmd);
+		ft_lstclear(&token, free);
+		return (NULL);
 	}
 	return (list);
 }

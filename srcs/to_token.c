@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:53:04 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/03 03:55:57 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/06 15:39:19 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int		find_next_ch(char *str, char c)
 
 static int		need_seperate(char *c)
 {
-	return (ft_isspace(*c) || *c == '<' || *c == '>'
+	return (ft_isspace(*c) || *c == '<' || *c == '>' || *c == ')' || *c == '('
 			|| *c == '|' || *c == ';' || ft_strncmp(c, "&&", 2) == 0);
 }
 
@@ -67,7 +67,7 @@ static int		find_token_length(char *str)
 	if (ft_strncmp(str, "<<", 2) == 0 || ft_strncmp(str, ">>", 2) == 0
 	|| ft_strncmp(str, "||", 2) == 0 || ft_strncmp(str, "&&", 2) == 0)
 		return (2);
-	else if (*str == '<' || *str == '|' || *str == '>')
+	else if (*str == '<' || *str == '|' || *str == '>' || *str == '(' || *str == ')' || *str == ';')
 		return (1);
 	return (find_token_non_end(str));
 }
