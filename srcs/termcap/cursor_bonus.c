@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:43:05 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/07 01:23:44 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:53:01 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	move_cursor_left(void)
 	if (g_tc->cur_pos == 0)
 		return ;
 	g_tc->cur_pos--;
-	(g_tc->start_col + g_tc->cur_pos + g_tc->plen + 1) % g_tc->col == 0 ?
-		g_tc->currow -= 1 : 0;
-	(g_tc->start_col + g_tc->cur_pos + g_tc->plen + 1) % g_tc->col == 0 ?
-		g_tc->mod_offset += 1 : 0;
+	if ((g_tc->start_col + g_tc->cur_pos + g_tc->plen + 1) % g_tc->col == 0)
+		g_tc->currow -= 1;
+	if ((g_tc->start_col + g_tc->cur_pos + g_tc->plen + 1) % g_tc->col == 0)
+		g_tc->mod_offset += 1;
 	tputs(tgoto(g_tc->cm, (g_tc->start_col + g_tc->cur_pos + g_tc->plen) %
 		g_tc->col, g_tc->currow), 1, putchar_tc);
 }
@@ -34,10 +34,10 @@ void	move_cursor_right(char **line)
 	if (g_tc->cur_pos == (int)ft_strlen(*line))
 		return ;
 	g_tc->cur_pos++;
-	(g_tc->start_col + g_tc->cur_pos + g_tc->plen) % g_tc->col == 0 ?
-		g_tc->currow += 1 : 0;
-	(g_tc->start_col + g_tc->cur_pos + g_tc->plen) % g_tc->col == 0 ?
-		g_tc->mod_offset -= 1 : 0;
+	if ((g_tc->start_col + g_tc->cur_pos + g_tc->plen) % g_tc->col == 0)
+		g_tc->currow += 1;
+	if ((g_tc->start_col + g_tc->cur_pos + g_tc->plen) % g_tc->col == 0)
+		g_tc->mod_offset -= 1;
 	tputs(tgoto(g_tc->cm, (g_tc->start_col + g_tc->cur_pos + g_tc->plen) %
 		g_tc->col, g_tc->currow), 1, putchar_tc);
 }
