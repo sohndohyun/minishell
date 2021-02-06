@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 14:58:31 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 16:58:12 by hyeonseun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 t_list	*g_env;
 
-int		main(int argc, char **argv, char **envp)
+int			main(int argc, char **argv, char **envp)
 {
-	char	*line;
-	t_list	*token;
-	t_list	*cmd;
-	t_list	*env;
+	char		*line;
+	t_list		*token;
+	t_list		*cmd;
+	t_list		*env;
 	t_termcap	termcap;
 
 	(void)argc;

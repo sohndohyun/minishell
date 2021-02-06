@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 15:05:04 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 16:52:49 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,11 @@ void			init_term(void);
 void			init_tc(void);
 void			reinit_termcap(void);
 t_list			*get_env(char **envp);
+int				check_first_equal_char(int *pos, char *str);
+int				is_valid_env_key(char *key);
 
 extern t_list	*g_env;
 
-#include <stdio.h>
 # include "termcaps.h"
 
 #endif

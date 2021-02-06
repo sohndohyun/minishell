@@ -6,13 +6,13 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:52:11 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 14:58:28 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 16:57:50 by hyeonseun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_bonus.h"
 
-int		setup(void)
+int			setup(void)
 {
 	if (!ascii_art())
 		return (0);
@@ -48,7 +48,7 @@ t_list		*get_env(char **envp)
 	return (envs);
 }
 
-void	init_term(void)
+void		init_term(void)
 {
 	t_env	*env;
 
@@ -66,14 +66,14 @@ void	init_term(void)
 	init_tc();
 }
 
-void	init_tc(void)
+void		init_tc(void)
 {
 	g_tc->cm = tgetstr("cm", NULL);
 	g_tc->ce = tgetstr("ce", NULL);
 	g_tc->dl = tgetstr("DL", NULL);
 }
 
-void	reinit_termcap(void)
+void		reinit_termcap(void)
 {
 	g_tc->rowoffset = 0;
 	g_tc->cur_history = NULL;
