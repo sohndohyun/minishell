@@ -6,11 +6,14 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 23:26:36 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:22:25 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "env.h"
+#include "utils.h"
+#include "termcap_bonus.h"
 
 t_list		*g_env;
 t_termcap	*g_tc;

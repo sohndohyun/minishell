@@ -6,11 +6,12 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:55:10 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 14:46:08 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 00:52:11 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "env.h"
 
 int		is_equal_key(t_env *env, char *key)
 {

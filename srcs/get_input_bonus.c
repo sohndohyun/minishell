@@ -6,11 +6,12 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:24:28 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 23:26:36 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:23:09 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "termcap_bonus.h"
 
 void		handle_move_keys(long c, char **line)
 {
@@ -30,6 +31,30 @@ void		handle_move_keys(long c, char **line)
 		return (move_cursor_begin(line));
 	else if (c == END)
 		return (move_cursor_end(line));
+}
+
+void		print_line_sub(long c)
+{
+	if ((g_tc->cur_pos + g_tc->plen + g_tc->start_col) % g_tc->col == 0 ||
+		((g_tc->start_col + g_tc->cur_pos + g_tc->plen + 1) % g_tc->col == 0 &&
+		c == BACKSPACE && g_tc->backspace != BACKSPACE) || ((g_tc->cur_pos +
+		g_tc->plen + g_tc->start_col - 1) % g_tc->col == 0 && c != BACKSPACE &&
+		g_tc->backspace == BACKSPACE))
+	{
+		c != BACKSPACE ? g_tc->mod_offset -= 1 : 0;
+		c == BACKSPACE ? g_tc->mod_offset += 1 : 0;
+		if (g_tc->currow >= g_tc->row)
+		{
+			g_tc->start_row -= 1;
+			write(1, "\n", 1);
+		}
+	}
+	g_tc->backspace = c;
+	if ((g_tc->lenlen + g_tc->plen + g_tc->start_col) % g_tc->col == 0
+		&& c == BACKSPACE)
+		write(1, " ", 1);
+	tputs(tgoto(g_tc->cm, (g_tc->start_col + g_tc->cur_pos + g_tc->plen)
+		% g_tc->col, g_tc->currow - g_tc->mod_offset), 1, putchar_tc);
 }
 
 void		print_line(long c, char **line)
@@ -57,30 +82,6 @@ void		print_line(long c, char **line)
 		c == BACKSPACE ? g_tc->mod_offset -= 1 : 0;
 	}
 	print_line_sub(c);
-}
-
-void		print_line_sub(long c)
-{
-	if ((g_tc->cur_pos + g_tc->plen + g_tc->start_col) % g_tc->col == 0 ||
-		((g_tc->start_col + g_tc->cur_pos + g_tc->plen + 1) % g_tc->col == 0 &&
-		c == BACKSPACE && g_tc->backspace != BACKSPACE) || ((g_tc->cur_pos +
-		g_tc->plen + g_tc->start_col - 1) % g_tc->col == 0 && c != BACKSPACE &&
-		g_tc->backspace == BACKSPACE))
-	{
-		c != BACKSPACE ? g_tc->mod_offset -= 1 : 0;
-		c == BACKSPACE ? g_tc->mod_offset += 1 : 0;
-		if (g_tc->currow >= g_tc->row)
-		{
-			g_tc->start_row -= 1;
-			write(1, "\n", 1);
-		}
-	}
-	g_tc->backspace = c;
-	if ((g_tc->lenlen + g_tc->plen + g_tc->start_col) % g_tc->col == 0
-		&& c == BACKSPACE)
-		write(1, " ", 1);
-	tputs(tgoto(g_tc->cm, (g_tc->start_col + g_tc->cur_pos + g_tc->plen)
-		% g_tc->col, g_tc->currow - g_tc->mod_offset), 1, putchar_tc);
 }
 
 void		handle_keys(long c, char **line)

@@ -6,11 +6,12 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 23:07:06 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 23:07:59 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:07:51 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "utils.h"
 
 int			is_type_token(char *str)
 {
@@ -80,4 +81,5 @@ t_list		*clear_cmd(t_cmd *cmd, t_list *cmd_list, t_list *token)
 	free_cmd(cmd);
 	ft_lstclear(&cmd_list, free_cmd);
 	ft_lstclear(&token, free);
+	return (NULL);
 }

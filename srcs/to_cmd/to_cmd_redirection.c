@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   to_cmd_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 03:13:55 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 23:47:59 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/07 01:08:43 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "utils.h"
 
-void	catch_ctrld_heredoc(char **line)
+void		catch_ctrld_heredoc(char **line)
 {
 	char	*line_buf;
 	int		flag_exit;
@@ -41,7 +42,7 @@ void	catch_ctrld_heredoc(char **line)
 	free(line_buf);
 }
 
-int		get_herdoc_input(char **line)
+int			get_herdoc_input(char **line)
 {
 	catch_ctrld_heredoc(line);
 	if (*line == NULL || ft_strcmp(*line, "") == 0)
@@ -52,7 +53,7 @@ int		get_herdoc_input(char **line)
 	return (1);
 }
 
-int		here_document(char *value)
+int			here_document(char *value)
 {
 	char	*line;
 	char	*doc;
@@ -81,9 +82,9 @@ int		here_document(char *value)
 	return (fds[0]);
 }
 
-int		to_cmd_redirection(char *type, char *value, t_cmd *cmd)
+int			to_cmd_redirection(char *type, char *value, t_cmd *cmd)
 {
-	char *wc;
+	char	*wc;
 
 	if (!type || !value)
 		return (0);

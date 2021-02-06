@@ -3,62 +3,71 @@ CC=gcc
 FLAG=-Wall -Wextra -Werror
 LIBFT=./libft/libft.a
 SRCS= srcs/main.c \
+		srcs/init.c \
+		srcs/signal_handle.c \
 		srcs/print_prompt.c \
 		srcs/get_input.c \
-		srcs/signal_handle.c \
 		srcs/to_token.c \
 		srcs/to_token_utils.c \
-		srcs/to_cmd.c \
-		srcs/utils.c \
-		srcs/run_cmd.c \
+		srcs/to_cmd/to_cmd.c \
+		srcs/to_cmd/to_cmd_utils.c \
+		srcs/to_cmd/to_cmd_redirection.c \
+		srcs/to_cmd/to_cmd_redirection_utils.c \
 		srcs/fork_cmd.c \
-		srcs/ft_cd.c \
-		srcs/ft_echo.c \
-		srcs/ft_env.c \
-		srcs/ft_exit.c \
-		srcs/ft_export.c \
-		srcs/ft_export_utils.c \
-		srcs/ft_pwd.c \
-		srcs/ft_unset.c \
-		srcs/env_utils.c \
-		srcs/env_control.c \
+		srcs/run_cmd.c \
+		srcs/run_cmd_utils.c \
 		srcs/error.c \
-		srcs/init.c \
-		srcs/lst_utils.c \
-		srcs/to_cmd_redirection.c \
-		srcs/wildcard.c
+		srcs/env_control.c \
+		srcs/utils/utils.c \
+		srcs/utils/str_utils.c \
+		srcs/utils/lst_utils.c \
+		srcs/utils/env_utils.c \
+		srcs/builtin/ft_cd.c \
+		srcs/builtin/ft_echo.c \
+		srcs/builtin/ft_env.c \
+		srcs/builtin/ft_exit.c \
+		srcs/builtin/ft_export.c \
+		srcs/builtin/ft_export_utils.c \
+		srcs/builtin/ft_pwd.c \
+		srcs/builtin/ft_unset.c
+
 
 SRCS_BONUS= srcs/main_bonus.c \
+		srcs/init_bonus.c \
+		srcs/signal_handle_bonus.c \
 		srcs/print_prompt_bonus.c \
 		srcs/get_input_bonus.c \
-		srcs/signal_handle_bonus.c \
+		srcs/cmd_line_io_bonus.c \
+		srcs/history_bonus.c \
+		srcs/termcap/cursor_bonus.c \
+		srcs/termcap/cursor_line_bonus.c \
+		srcs/termcap/cursor_word_bonus.c \
+		srcs/termcap/termcap_utils_bonus.c \
 		srcs/to_token.c \
 		srcs/to_token_utils.c \
-		srcs/to_cmd.c \
-		srcs/utils.c \
-		srcs/run_cmd.c \
+		srcs/to_cmd/to_cmd_bonus.c \
+		srcs/to_cmd/to_cmd_utils.c \
+		srcs/to_cmd/to_cmd_redirection_bonus.c \
+		srcs/to_cmd/to_cmd_redirection_utils.c \
+		srcs/wildcard/wildcard_bonus.c \
+		srcs/wildcard/wildcard_utils_bonus.c \
 		srcs/fork_cmd.c \
-		srcs/ft_cd.c \
-		srcs/ft_echo.c \
-		srcs/ft_env.c \
-		srcs/ft_exit.c \
-		srcs/ft_export.c \
-		srcs/ft_export_utils.c \
-		srcs/ft_pwd.c \
-		srcs/ft_unset.c \
-		srcs/env_control.c \
-		srcs/env_utils.c \
+		srcs/run_cmd.c \
+		srcs/run_cmd_utils.c \
 		srcs/error.c \
-		srcs/lst_utils.c \
-		srcs/to_cmd_redirection.c \
-		srcs/wildcard.c \
-		srcs/init_bonus.c \
-		srcs/history_bonus.c \
-		srcs/termcap_utils_bonus.c \
-		srcs/cursor_word_bonus.c \
-		srcs/cursor_line_bonus.c \
-		srcs/cursor_bonus.c \
-		srcs/cmd_line_io_bonus.c
+		srcs/env_control.c \
+		srcs/utils/utils.c \
+		srcs/utils/str_utils.c \
+		srcs/utils/lst_utils.c \
+		srcs/utils/env_utils.c \
+		srcs/builtin/ft_cd.c \
+		srcs/builtin/ft_echo.c \
+		srcs/builtin/ft_env.c \
+		srcs/builtin/ft_exit.c \
+		srcs/builtin/ft_export.c \
+		srcs/builtin/ft_export_utils.c \
+		srcs/builtin/ft_pwd.c \
+		srcs/builtin/ft_unset.c
 
 OBJS			= ${SRCS:.c=.o}
 OBJS_BONUS		= ${SRCS_BONUS:.c=.o}

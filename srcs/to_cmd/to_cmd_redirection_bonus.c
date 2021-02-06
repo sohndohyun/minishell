@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   to_cmd_redirection_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 03:13:55 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 23:54:57 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/07 01:23:53 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "wildcard_bonus.h"
+#include "utils.h"
 
 void	catch_ctrld_heredoc(char **line)
 {

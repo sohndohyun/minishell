@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   history_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/26 16:59:43 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 15:53:33 by hyeonski         ###   ########.fr       */
+/*   Created: 2021/02/07 00:03:43 by hyeonski          #+#    #+#             */
+/*   Updated: 2021/02/07 00:30:03 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef HISTORY_BONUS_H
+# define HISTORY_BONUS_H
 
-void	print_env(t_env *env)
+typedef struct		s_hist
 {
-	if (env->value != NULL)
-	{
-		ft_putstr_fd(env->key, STDOUT_FILENO);
-		ft_putstr_fd("=", STDOUT_FILENO);
-		ft_putendl_fd(env->value, STDOUT_FILENO);
-	}
-}
+	char			*cmd;
+	struct s_hist	*prev;
+	struct s_hist	*next;
+}					t_hist;
 
-int		ft_env(t_list *env)
-{
-	while (env)
-	{
-		if (env->content)
-			print_env(env->content);
-		env = env->next;
-	}
-	return (errno = 0);
-}
+/*
+** Src is : ../srcs/history_bonus.c
+*/
+void	up_history(char **line);
+void	down_history(char **line);
+void	add_cmd_to_history(char *cmd);
+void	add_history_list(t_hist **begin, t_hist *new);
+void	clear_history_list(t_hist **begin);
+
+#endif
