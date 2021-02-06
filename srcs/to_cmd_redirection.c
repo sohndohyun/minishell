@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 03:13:55 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 20:18:35 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 20:20:16 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int		get_herdoc_input(char **line)
 	}
 	return (1);
 }
-
 
 int		here_document(char *value)
 {
