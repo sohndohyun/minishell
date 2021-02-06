@@ -6,13 +6,13 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:52:13 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 14:55:35 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 21:18:10 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		setup(void)
+int			setup(void)
 {
 	if (!ascii_art())
 		return (0);
