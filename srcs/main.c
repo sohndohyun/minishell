@@ -129,7 +129,6 @@ int		main(int argc, char **argv, char **envp)
 			continue ; //syntax error!
 		free(line);
 		ft_lstclear(&token, free);
-		//print_list(cmd);
 		fork_cmd(cmd);
 		ft_lstclear(&cmd, free_cmd);
 	}

@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/05 12:04:51 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/05 23:40:56 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,16 +124,22 @@ int		main(int argc, char **argv, char **envp)
 		print_prompt();
 		get_cursor_position(&g_tc->col, &g_tc->start_row);
 		g_tc->mod_offset = 0;
+		token = NULL;
+		cmd = NULL;
 		if (get_input(&line))
 		{
 			tcsetattr(0, TCSANOW, &g_tc->term_backup);
 			add_cmd_to_history(line);
-			if (!(token = to_token(line)) || !(cmd = to_cmd(token)))
-				continue ; //syntax error!
-			ft_free_and_null((void **)&line);
+			if (line)
+			{
+				token = to_token(line);
+				cmd = to_cmd(token);
+				fork_cmd(cmd);
+			}
 			ft_lstclear(&token, free);
-			fork_cmd(cmd);
 			ft_lstclear(&cmd, free_cmd);
+			tcsetattr(0, TCSANOW, &g_tc->term);
 		}
+		ft_free_and_null((void **)&line);
 	}
 }
