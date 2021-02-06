@@ -6,12 +6,11 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 21:28:21 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 21:33:26 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/06 23:54:22 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wildcard_bonus.h"
-#include "minishell.h"
 
 int		iswildcard(char *str)
 {

@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   to_cmd_redirection.c                               :+:      :+:    :+:   */
+/*   to_cmd_redirection_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 03:13:55 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 23:47:59 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/06 23:54:57 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "wildcard_bonus.h"
 
 void	catch_ctrld_heredoc(char **line)
 {
@@ -92,6 +93,8 @@ int		to_cmd_redirection(char *type, char *value, t_cmd *cmd)
 		cmd->fd_in = here_document(value);
 		return (1);
 	}
+	if ((wc = rd_wildcard(value)) == NULL)
+		return (0);
 	if (ft_strcmp(type, "<") == 0)
 	{
 		cmd->fd_in = open(wc, O_RDONLY);
