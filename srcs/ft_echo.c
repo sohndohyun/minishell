@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 17:12:36 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/02 00:27:04 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 15:53:25 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		ft_echo(char **argv)
 	int		i;
 	int		op_n;
 
-	if (argv== NULL || argv[1] == NULL)
+	if (argv == NULL || argv[1] == NULL)
 	{
 		ft_putendl_fd("", STDOUT_FILENO);
 		return (0);

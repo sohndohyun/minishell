@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 01:49:29 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 14:49:45 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 16:43:58 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,10 @@
 
 int is_cmd_builtin(char *cmd)
 {
-	int cmd_len;
-
-	cmd_len = ft_strlen(cmd);
-	if(ft_strncmp(cmd, "cd", cmd_len) == 0 || ft_strncmp(cmd, "echo", cmd_len) == 0
-	 || ft_strncmp(cmd, "pwd", cmd_len) == 0 || ft_strncmp(cmd, "env", cmd_len) == 0
-	 || ft_strncmp(cmd, "export", cmd_len) == 0 || ft_strncmp(cmd, "unset", cmd_len) == 0
-	 || ft_strncmp(cmd, "exit", cmd_len) == 0)
+	if(ft_strcmp(cmd, "cd") == 0 || ft_strcmp(cmd, "echo") == 0
+	 || ft_strcmp(cmd, "pwd") == 0 || ft_strcmp(cmd, "env") == 0
+	 || ft_strcmp(cmd, "export") == 0 || ft_strcmp(cmd, "unset") == 0
+	 || ft_strcmp(cmd, "exit") == 0)
 		return (1);
 	return (0);
 }
@@ -60,6 +57,8 @@ int run_cmd_builtin(t_cmd *cmd)
 	else 
 		return (run_cmd_builtin_run(cmd));
 }
+
+#include <stdio.h>
 
 char *find_path(char *cmd, t_list *env)
 {
@@ -100,20 +99,23 @@ char	**get_envp(t_list *env_list)
 	i = 0;
 	temp1 = ft_lstsize(env_list);
 	ret = malloc(sizeof(char*) * (temp1 + 1));
-	ret[temp1] = 0;
 	while (env_list)
 	{
 		env = env_list->content;
-		temp1 = ft_strlen(env->key);
-		temp2 = ft_strlen(env->value);
-		ret[i] = malloc(temp1 + temp2 + 2);
-		ft_memcpy(ret[i], env->key, temp1);
-		ret[i][temp1] = '=';
-		ft_memcpy(ret[i] + temp1 + 1, env->value, temp2);
-		ret[i][temp1 + temp2 + 1] = 0;
+		if (env->value)
+		{
+			temp1 = ft_strlen(env->key);
+			temp2 = ft_strlen(env->value);
+			ret[i] = malloc(temp1 + temp2 + 2);
+			ft_memcpy(ret[i], env->key, temp1);
+			ret[i][temp1] = '=';
+			ft_memcpy(ret[i] + temp1 + 1, env->value, temp2);
+			ret[i][temp1 + temp2 + 1] = 0;
+			i++;
+		}
 		env_list = env_list->next;
-		i++;
 	}
+	ret[i] = NULL;
 	return (ret);
 }
 

@@ -17,6 +17,7 @@ SRCS= srcs/main.c \
 		srcs/ft_env.c \
 		srcs/ft_exit.c \
 		srcs/ft_export.c \
+		srcs/ft_export_utils.c \
 		srcs/ft_pwd.c \
 		srcs/ft_unset.c \
 		srcs/env_utils.c \
@@ -42,6 +43,7 @@ SRCS_BONUS= srcs/main_bonus.c \
 		srcs/ft_env.c \
 		srcs/ft_exit.c \
 		srcs/ft_export.c \
+		srcs/ft_export_utils.c \
 		srcs/ft_pwd.c \
 		srcs/ft_unset.c \
 		srcs/env_control.c \

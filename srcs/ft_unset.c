@@ -6,13 +6,13 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 11:21:12 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/02 00:43:06 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 15:56:20 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		print_unset_error(char *id)
+int			print_unset_error(char *id)
 {
 	char	*temp;
 	char	*err_msg;
@@ -28,10 +28,10 @@ int		print_unset_error(char *id)
 	return (errno);
 }
 
-int		ft_unset(char **argv)
+int			ft_unset(char **argv)
 {
 	t_env	temp;
-	
+
 	if (argv == NULL)
 		return (1);
 	argv++;

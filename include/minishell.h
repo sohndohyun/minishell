@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 15:04:19 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 16:46:03 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ void			reinit_termcap(void);
 t_list			*get_env(char **envp);
 char			*ft_strcat(char *dst, const char *src);
 void			free_strarr(char **arr);
+int				check_first_equal_char(int *pos, char *str);
+int				is_valid_env_key(char *key);
 
 extern t_list	*g_env;
 
