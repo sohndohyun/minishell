@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/05 12:44:04 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 17:55:47 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	print_cmd(t_cmd *cmd)
 
 	i = 0;
 	temp = cmd->argv;
-	while (temp[i])
+	while (temp && temp[i])
 	{
 		printf("argv[%d]: %s\n", i, temp[i]);
 		i++;
