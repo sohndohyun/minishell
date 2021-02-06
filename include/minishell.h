@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/05 11:10:21 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 15:09:09 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,14 @@ typedef struct	s_env
 	char		*value;
 }				t_env;
 
-# define CT_NORM 1
+# define CT_CMD 0
+# define CT_SEMI 1
 # define CT_PIPE 2
 # define CT_AND 3
 # define CT_OR 4
+# define CT_BEGIN 5
+# define CT_END 6
+
 # define TRUE 1
 # define FALSE 2
 
