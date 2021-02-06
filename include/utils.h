@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 00:07:43 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/07 00:15:24 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:51:32 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	free_strarr(char **arr);
 */
 t_list	*ft_list_dup(t_list *lst, void *(*dup)(void *));
 t_list	*ft_list_sort(t_list *lst, int (*cmp)(void *, void *));
-void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
+void	ft_list_remove_if(t_list **begin_list,
+	void *data_ref, int (*cmp)(), void (*free_fct)(void *));
 
 #endif

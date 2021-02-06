@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/07 01:22:25 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:46:57 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,32 @@
 
 t_list		*g_env;
 t_termcap	*g_tc;
+
+t_list			*get_env(char **envp)
+{
+	int		pos;
+	t_env	*env;
+	t_list	*envs;
+
+	envs = 0;
+	while (*envp)
+	{
+		env = (t_env *)malloc(sizeof(t_env));
+		pos = ft_strchr(*envp, '=') - *envp;
+		env->key = ft_substr(*envp, 0, pos);
+		env->value = ft_substr(*envp, pos + 1, ft_strlen(*envp) - pos - 1);
+		ft_lstadd_back(&envs, ft_lstnew(env));
+		envp++;
+	}
+	if (search_env(envs, "OLDPWD") == NULL)
+	{
+		env = (t_env *)malloc(sizeof(t_env));
+		env->key = ft_strdup("OLDPWD");
+		env->value = NULL;
+		ft_lstadd_back(&envs, ft_lstnew(env));
+	}
+	return (envs);
+}
 
 void			run_minishell(char **line, t_list *token, t_list *cmd)
 {
