@@ -6,11 +6,11 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:28:09 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 21:18:29 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 23:26:36 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_bonus.h"
+#include "minishell.h"
 
 void	handle_signal_main(int signo)
 {

@@ -6,13 +6,14 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 21:27:26 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 23:26:36 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_bonus.h"
+#include "minishell.h"
 
-t_list	*g_env;
+t_list		*g_env;
+t_termcap	*g_tc;
 
 void			run_minishell(char **line, t_list *token, t_list *cmd)
 {
