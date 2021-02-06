@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:43:05 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 14:58:02 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 16:56:18 by hyeonseun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	move_cursor_right(char **line)
 	tputs(tgoto(g_tc->cm, (g_tc->start_col + g_tc->cur_pos + g_tc->plen) %
 		g_tc->col, g_tc->currow), 1, putchar_tc);
 }
-
 
 void	get_cursor_position(int *col, int *rows)
 {

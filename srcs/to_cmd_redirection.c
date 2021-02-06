@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   to_cmd_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 03:13:55 by dsohn             #+#    #+#             */
 /*   Updated: 2021/02/06 20:20:16 by dsohn            ###   ########.fr       */
@@ -30,7 +30,7 @@ int		to_cmd_redirection_error(t_list *token)
 	return (0);
 }
 
-void	catch_ctrld_hd(char **line)
+void	catch_ctrld_heredoc(char **line)
 {
 	char	*line_buf;
 	int		flag_exit;
@@ -59,9 +59,9 @@ void	catch_ctrld_hd(char **line)
 	free(line_buf);
 }
 
-int		get_input_hd(char **line)
+int		get_herdoc_input(char **line)
 {
-	catch_ctrld_hd(line);
+	catch_ctrld_heredoc(line);
 	if (*line == NULL || ft_strcmp(*line, "") == 0)
 	{
 		free(*line);
@@ -82,7 +82,7 @@ int		here_document(char *value)
 	while (1)
 	{
 		write(1, "> ", 2);
-		ret = get_input_hd(&line);
+		ret = get_herdoc_input(&line);
 		if (ret)
 		{
 			if (ft_strcmp(value, line) == 0)

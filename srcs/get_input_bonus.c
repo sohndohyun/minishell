@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:24:28 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 14:58:18 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 16:57:21 by hyeonseun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void		handle_move_keys(long c, char **line)
 	else if (c == END)
 		return (move_cursor_end(line));
 }
-
 
 void		print_line(long c, char **line)
 {
@@ -84,7 +83,6 @@ void		print_line_sub(long c)
 		% g_tc->col, g_tc->currow - g_tc->mod_offset), 1, putchar_tc);
 }
 
-
 void		handle_keys(long c, char **line)
 {
 	cursor_win();
@@ -112,7 +110,7 @@ void		handle_keys(long c, char **line)
 	print_line(c, line);
 }
 
-int		get_input(char **line)
+int			get_input(char **line)
 {
 	int		ret;
 	long	c;

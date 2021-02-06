@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:35:44 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 14:58:50 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 16:55:43 by hyeonseun        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	cut_line(char **line)
 	else
 		empty_space(ft_strlen(*line) + g_tc->plen);
 	to_free = g_tc->copy_cmd;
-	g_tc->copy_cmd = ft_substr(*line, g_tc->cur_pos, ft_strlen(*line) - g_tc->cur_pos);
+	g_tc->copy_cmd =
+		ft_substr(*line, g_tc->cur_pos, ft_strlen(*line) - g_tc->cur_pos);
 	free(to_free);
 	to_free = *line;
 	*line = ft_substr(*line, 0, g_tc->cur_pos);
@@ -75,7 +76,8 @@ void	copy_line(char **line)
 	if (*line == NULL)
 		return ;
 	to_free = g_tc->copy_cmd;
-	g_tc->copy_cmd = ft_substr(*line, g_tc->cur_pos, ft_strlen(*line) - g_tc->cur_pos);
+	g_tc->copy_cmd =
+		ft_substr(*line, g_tc->cur_pos, ft_strlen(*line) - g_tc->cur_pos);
 	free(to_free);
 }
 
@@ -97,6 +99,7 @@ void	paste_line(char **line)
 		*line = ft_strdup(g_tc->copy_cmd);
 	g_tc->cur_pos += ft_strlen(g_tc->copy_cmd);
 	g_tc->rowoffset = (ft_strlen(*line) + g_tc->plen) / g_tc->col;
-	g_tc->mod_offset = (ft_strlen(*line) - g_tc->cur_pos + g_tc->plen) / g_tc->col;
+	g_tc->mod_offset =
+		(ft_strlen(*line) - g_tc->cur_pos + g_tc->plen) / g_tc->col;
 	g_tc->currow = g_tc->start_row + g_tc->rowoffset;
 }

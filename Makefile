@@ -31,7 +31,7 @@ SRCS= srcs/main.c \
 SRCS_BONUS= srcs/main_bonus.c \
 		srcs/print_prompt_bonus.c \
 		srcs/get_input_bonus.c \
-		srcs/signal_handle.c \
+		srcs/signal_handle_bonus.c \
 		srcs/to_token.c \
 		srcs/to_token_utils.c \
 		srcs/to_cmd.c \
