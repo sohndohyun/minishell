@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_cmd_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 03:13:55 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/07 01:08:43 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:34:30 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ int			here_document(char *value)
 
 int			to_cmd_redirection(char *type, char *value, t_cmd *cmd)
 {
-	char	*wc;
-
 	if (!type || !value)
 		return (0);
 	if (ft_strcmp(type, "<<") == 0)
@@ -95,14 +93,12 @@ int			to_cmd_redirection(char *type, char *value, t_cmd *cmd)
 	}
 	if (ft_strcmp(type, "<") == 0)
 	{
-		cmd->fd_in = open(wc, O_RDONLY);
-		free(wc);
+		cmd->fd_in = open(value, O_RDONLY);
 		return (cmd->fd_in < 0 ? 0 : 1);
 	}
 	else if (ft_strcmp(type, ">") == 0)
-		cmd->fd_out = open(wc, O_WRONLY | O_CREAT, 0644);
+		cmd->fd_out = open(value, O_WRONLY | O_CREAT, 0644);
 	else
-		cmd->fd_out = open(wc, O_WRONLY | O_APPEND, 0644);
-	free(wc);
+		cmd->fd_out = open(value, O_WRONLY | O_APPEND, 0644);
 	return (cmd->fd_out < 0 ? 0 : 1);
 }

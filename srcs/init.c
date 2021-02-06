@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:52:13 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/07 00:49:09 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:40:56 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "env.h"
 
-int		ascii_art(void)
+int			ascii_art(void)
 {
 	int		fd;
 	char	*line;

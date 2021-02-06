@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   termcap_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 00:01:44 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/07 00:29:47 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:50:59 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TERMCAP_BONUS_H
 # define TERMCAP_BONUS_H
 
-#include "history_bonus.h"
+# include "history_bonus.h"
 # include <curses.h>
 # include <term.h>
 # include <sys/ioctl.h>
@@ -65,18 +65,18 @@ typedef struct		s_termcap
 	long			backspace;
 }					t_termcap;
 
-void	get_cursor_position(int *col, int *rows);
-void	cursor_win(void);
-int		putchar_tc(int tc);
-void	empty_space(int len);
-void	move_cursor_left(void);
-void	move_cursor_right(char **line);
-void	move_prev_line(void);
-void	move_next_line(char **line);
-void	move_cursor_begin(char **line);
-void	move_cursor_end(char **line);
-void	move_prev_word(char **line);
-void	move_next_word(char **line);
+void				get_cursor_position(int *col, int *rows);
+void				cursor_win(void);
+int					putchar_tc(int tc);
+void				empty_space(int len);
+void				move_cursor_left(void);
+void				move_cursor_right(char **line);
+void				move_prev_line(void);
+void				move_next_line(char **line);
+void				move_cursor_begin(char **line);
+void				move_cursor_end(char **line);
+void				move_prev_word(char **line);
+void				move_next_word(char **line);
 
 extern t_termcap	*g_tc;
 
