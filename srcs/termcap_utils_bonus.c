@@ -6,11 +6,11 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:36:43 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 14:58:38 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 23:26:36 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_bonus.h"
+#include "minishell.h"
 
 void	cursor_win(void)
 {

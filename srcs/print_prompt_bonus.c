@@ -6,11 +6,11 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:24:14 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 14:58:34 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 23:26:36 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_bonus.h"
+#include "minishell.h"
 
 int		ascii_art(void)
 {
