@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_cmd_util.c                                     :+:      :+:    :+:   */
+/*   run_cmd_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 22:30:47 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 22:39:59 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/07 01:13:27 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "run_cmd.h"
 #include "minishell.h"
+#include "env.h"
+#include "utils.h"
 
 char	*find_path(char *cmd, t_list *env)
 {

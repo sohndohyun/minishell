@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/26 18:58:52 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/02 00:32:40 by hyeonski         ###   ########.fr       */
+/*   Created: 2021/01/26 16:59:43 by hyeonski          #+#    #+#             */
+/*   Updated: 2021/02/07 00:49:40 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "env.h"
 
-int		ft_pwd(void)
+void	print_env(t_env *env)
 {
-	char	dir[4096];
-
-	if (getcwd(dir, 4096) == NULL)
+	if (env->value != NULL)
 	{
-		print_error("pwd", errno, strerror(errno));
-		return (1);
+		ft_putstr_fd(env->key, STDOUT_FILENO);
+		ft_putstr_fd("=", STDOUT_FILENO);
+		ft_putendl_fd(env->value, STDOUT_FILENO);
 	}
-	else
-		ft_putendl_fd(dir, STDOUT_FILENO);
-	return (0);
+}
+
+int		ft_env(t_list *env)
+{
+	while (env)
+	{
+		if (env->content)
+			print_env(env->content);
+		env = env->next;
+	}
+	return (errno = 0);
 }

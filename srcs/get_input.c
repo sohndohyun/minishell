@@ -6,11 +6,12 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:24:28 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/31 16:42:16 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:06:49 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "utils.h"
 
 void	catch_ctrld(char **line)
 {

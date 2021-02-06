@@ -6,11 +6,12 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:48:48 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/02 00:26:17 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 00:49:27 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "env.h"
 
 void	set_pwd(t_list *env)
 {

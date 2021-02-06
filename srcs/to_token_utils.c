@@ -6,11 +6,13 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 21:52:37 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 21:40:32 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:06:59 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "env.h"
+#include "utils.h"
 
 int			get_key_length(char *key)
 {

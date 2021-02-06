@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_prompt.c                                     :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/20 14:24:14 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/07 00:35:37 by hyeonski         ###   ########.fr       */
+/*   Created: 2021/01/26 18:58:52 by hyeonski          #+#    #+#             */
+/*   Updated: 2021/02/07 00:50:02 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_prompt(void)
+int		ft_pwd(void)
 {
-	write(STDOUT_FILENO, "minishell$ ", 11);
+	char	dir[4096];
+
+	if (getcwd(dir, 4096) == NULL)
+	{
+		print_error("pwd", errno, strerror(errno));
+		return (1);
+	}
+	else
+		ft_putendl_fd(dir, STDOUT_FILENO);
+	return (0);
 }

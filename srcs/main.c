@@ -6,11 +6,12 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 21:25:04 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:06:30 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "env.h"
 
 t_list	*g_env;
 
@@ -47,5 +48,7 @@ int		main(int argc, char **argv, char **envp)
 		return (1);
 	env = get_env(envp);
 	g_env = env;
+	token = NULL;
+	cmd = NULL;
 	run_minishell(&line, token, cmd);
 }

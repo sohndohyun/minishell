@@ -6,11 +6,35 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:52:13 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 21:18:10 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 00:49:09 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "env.h"
+
+int		ascii_art(void)
+{
+	int		fd;
+	char	*line;
+
+	line = 0;
+	if (!(fd = open("ascii_art.txt", O_RDONLY)))
+	{
+		write(1, "\nError in open\n", 15);
+		return (0);
+	}
+	while (get_next_line(fd, &line) != 0)
+	{
+		write(1, line, ft_strlen(line));
+		write(1, "\n", 1);
+		free(line);
+	}
+	write(1, line, ft_strlen(line));
+	write(1, "\n", 1);
+	free(line);
+	return (1);
+}
 
 int			setup(void)
 {

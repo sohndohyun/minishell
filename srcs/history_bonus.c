@@ -6,11 +6,13 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:37:15 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 23:26:36 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:23:30 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "termcap_bonus.h"
+#include "utils.h"
 
 void	up_history(char **line)
 {

@@ -6,11 +6,13 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 14:06:48 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 16:45:17 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:14:48 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "env.h"
+#include "utils.h"
 
 void		print_env_export(t_env *env)
 {

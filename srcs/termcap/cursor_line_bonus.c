@@ -6,11 +6,12 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:44:37 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 23:26:36 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 00:51:22 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "termcap_bonus.h"
 
 void	move_prev_line(void)
 {

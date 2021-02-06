@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 13:06:18 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 23:55:49 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/07 01:24:29 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wildcard_bonus.h"
+#include "utils.h"
 
 void	wildcard_inloop(char **argv, int i, int *argc)
 {

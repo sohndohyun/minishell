@@ -6,11 +6,12 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 21:19:53 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 21:21:00 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:13:44 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "utils.h"
 
 char	*ft_strjoin_middle(char *s1, const char *s2, int div)
 {

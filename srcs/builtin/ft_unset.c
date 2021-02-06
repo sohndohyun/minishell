@@ -6,11 +6,13 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 11:21:12 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 15:56:20 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:16:19 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "env.h"
+#include "utils.h"
 
 int			print_unset_error(char *id)
 {

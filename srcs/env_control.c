@@ -6,11 +6,12 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 14:28:10 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 14:46:12 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 00:53:24 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "env.h"
 
 void	free_env(void *value)
 {
