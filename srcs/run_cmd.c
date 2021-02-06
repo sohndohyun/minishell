@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 01:49:29 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/02 00:42:28 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 14:49:45 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,6 @@ int run_cmd_builtin(t_cmd *cmd)
 		return (run_cmd_builtin_run(cmd));
 }
 
-void free_strarr(char **arr)
-{
-	int i;
-
-	if (!arr)
-		return ;
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
-}
-
 char *find_path(char *cmd, t_list *env)
 {
 	char *path;
@@ -101,7 +89,7 @@ char *find_path(char *cmd, t_list *env)
 	return (ft_strdup(cmd));
 }
 
-char **get_envp(t_list *env_list)
+char	**get_envp(t_list *env_list)
 {
 	int temp1;
 	int temp2;
@@ -129,7 +117,7 @@ char **get_envp(t_list *env_list)
 	return (ret);
 }
 
-int run_cmd_execve(t_cmd *cmd)
+int		run_cmd_execve(t_cmd *cmd)
 {
 	char *path;
 	char **envp;
@@ -146,11 +134,26 @@ int run_cmd_execve(t_cmd *cmd)
 	return (127);
 }
 
-int run_cmd(t_cmd *cmd, int (*run_cmd_type)(t_cmd*))
+int		wait_chlid(pid_t pid)
 {
-	int status;
-	pid_t	pid;
 	int		signo;
+	int		status;
+	
+	waitpid(pid, &status, 0);
+	if (WIFSIGNALED(status))
+	{
+		signo = WTERMSIG(status);
+		if (signo == SIGINT)
+			return (130);
+		if (signo == SIGQUIT)
+			return (131);
+	}
+	return (WEXITSTATUS(status));
+}
+
+int		run_cmd(t_cmd *cmd, int (*run_cmd_type)(t_cmd*))
+{
+	pid_t	pid;
 
 	signal(SIGQUIT, handle_signal_chlid);
 	if (!(pid = fork()))
@@ -165,14 +168,5 @@ int run_cmd(t_cmd *cmd, int (*run_cmd_type)(t_cmd*))
 		close(cmd->pfd[0][0]);
 	if (cmd->pfd[1][0] != -1)
 		close(cmd->pfd[1][1]);
-	waitpid(pid, &status, 0);
-	if (WIFSIGNALED(status))
-	{
-		signo = WTERMSIG(status);
-		if (signo == SIGINT)
-			return (130);
-		if (signo == SIGQUIT)
-			return (131);
-	}
-	return (WEXITSTATUS(status));
+	return (wait_chlid(pid));
 }

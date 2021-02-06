@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   minishell_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 15:04:19 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 15:05:04 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,10 @@ void			init_term(void);
 void			init_tc(void);
 void			reinit_termcap(void);
 t_list			*get_env(char **envp);
-char			*ft_strcat(char *dst, const char *src);
-void			free_strarr(char **arr);
 
 extern t_list	*g_env;
+
+#include <stdio.h>
+# include "termcaps.h"
 
 #endif

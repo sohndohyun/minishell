@@ -20,14 +20,14 @@ SRCS= srcs/main.c \
 		srcs/ft_pwd.c \
 		srcs/ft_unset.c \
 		srcs/env_utils.c \
+		srcs/env_control.c \
 		srcs/error.c \
-		srcs/env_utils2.c \
+		srcs/init.c \
 		srcs/lst_utils.c \
 		srcs/to_cmd_redirection.c \
 		srcs/wildcard.c
 
 SRCS_BONUS= srcs/main_bonus.c \
-		srcs/cursor.c \
 		srcs/print_prompt_bonus.c \
 		srcs/get_input_bonus.c \
 		srcs/signal_handle.c \
@@ -44,12 +44,19 @@ SRCS_BONUS= srcs/main_bonus.c \
 		srcs/ft_export.c \
 		srcs/ft_pwd.c \
 		srcs/ft_unset.c \
+		srcs/env_control.c \
 		srcs/env_utils.c \
 		srcs/error.c \
-		srcs/env_utils2.c \
 		srcs/lst_utils.c \
 		srcs/to_cmd_redirection.c \
-		srcs/wildcard.c
+		srcs/wildcard.c \
+		srcs/init_bonus.c \
+		srcs/history_bonus.c \
+		srcs/termcap_utils_bonus.c \
+		srcs/cursor_word_bonus.c \
+		srcs/cursor_line_bonus.c \
+		srcs/cursor_bonus.c \
+		srcs/cmd_line_io_bonus.c
 
 OBJS			= ${SRCS:.c=.o}
 OBJS_BONUS		= ${SRCS_BONUS:.c=.o}
@@ -83,4 +90,4 @@ fclean:
 	rm -f $(NAME)
 	rm -f $(OBJS) $(OBJS_BONUS)
 
-re: fclean all`
+re: fclean all
