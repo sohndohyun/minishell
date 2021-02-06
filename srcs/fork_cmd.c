@@ -6,13 +6,13 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 12:16:55 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 17:55:59 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/06 21:15:33 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void set_cmd_pfd(t_list *cmd_list)
+static void	set_cmd_pfd(t_list *cmd_list)
 {
 	t_cmd	*cmd;
 	t_cmd	*bcmd;
@@ -24,7 +24,7 @@ static void set_cmd_pfd(t_list *cmd_list)
 	bcmd = NULL;
 	btype = CT_SEMI;
 	while (cmd_list)
-	{ 
+	{
 		cmd = cmd_list->content;
 		if (btype == CT_PIPE)
 		{
@@ -40,13 +40,8 @@ static void set_cmd_pfd(t_list *cmd_list)
 	}
 }
 
-void fork_run_cmd(t_cmd *cmd, int *status)
+void		fork_run_cmd(t_cmd *cmd, int *status, int save_in, int save_out)
 {
-	int		save_in;
-	int		save_out;
-
-	save_in = -1;
-	save_out = -1;
 	if (cmd->fd_in != 0)
 	{
 		save_in = dup(0);
@@ -73,7 +68,7 @@ void fork_run_cmd(t_cmd *cmd, int *status)
 	}
 }
 
-t_list *find_cmd_end(t_list* cmd_list)
+t_list		*find_cmd_end(t_list *cmd_list)
 {
 	t_cmd	*cmd;
 	int		stack;
@@ -93,7 +88,7 @@ t_list *find_cmd_end(t_list* cmd_list)
 	return (cmd_list);
 }
 
-void fork_cmd(t_list *cmd_list)
+void		fork_cmd(t_list *cmd_list)
 {
 	t_cmd	*cmd;
 	int		status;
@@ -113,10 +108,10 @@ void fork_cmd(t_list *cmd_list)
 		else if (cmd->type == CT_SEMI || cmd->type == CT_PIPE)
 			able = 1;
 		else if (cmd->type == CT_CMD && able)
-			fork_run_cmd(cmd, &status);
+			fork_run_cmd(cmd, &status, -1, -1);
 		else if (cmd->type == CT_BEGIN && !able)
 			cmd_list = find_cmd_end(cmd_list);
-		cmd_list = cmd_list->next;		
+		cmd_list = cmd_list->next;
 	}
 	errno = status;
 }

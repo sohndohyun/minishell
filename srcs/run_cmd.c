@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   run_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 01:49:29 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 16:43:58 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 22:38:26 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "run_cmd.h"
 #include "minishell.h"
-#include <sys/stat.h>
 
-int is_cmd_builtin(char *cmd)
+int		is_cmd_builtin(char *cmd)
 {
-	if(ft_strcmp(cmd, "cd") == 0 || ft_strcmp(cmd, "echo") == 0
-	 || ft_strcmp(cmd, "pwd") == 0 || ft_strcmp(cmd, "env") == 0
-	 || ft_strcmp(cmd, "export") == 0 || ft_strcmp(cmd, "unset") == 0
-	 || ft_strcmp(cmd, "exit") == 0)
+	if (ft_strcmp(cmd, "cd") == 0 || ft_strcmp(cmd, "echo") == 0
+		|| ft_strcmp(cmd, "pwd") == 0 || ft_strcmp(cmd, "env") == 0
+		|| ft_strcmp(cmd, "export") == 0 || ft_strcmp(cmd, "unset") == 0
+		|| ft_strcmp(cmd, "exit") == 0)
 		return (1);
 	return (0);
 }
 
-int run_cmd_builtin_run(t_cmd *cmd)
+int		run_cmd_builtin_run(t_cmd *cmd)
 {
 	int cmd_len;
 	int	status;
@@ -50,73 +50,12 @@ int run_cmd_builtin_run(t_cmd *cmd)
 	return (status);
 }
 
-int run_cmd_builtin(t_cmd *cmd)
+int		run_cmd_builtin(t_cmd *cmd)
 {
 	if (cmd->pfd[1][0] != -1 || cmd->pfd[0][0] != -1)
 		return (run_cmd(cmd, run_cmd_builtin_run));
-	else 
+	else
 		return (run_cmd_builtin_run(cmd));
-}
-
-#include <stdio.h>
-
-char *find_path(char *cmd, t_list *env)
-{
-	char *path;
-	char **paths;
-	char *temp;
-	int i;
-	struct stat s;
-	
-	if (!(temp = search_env(env, "PATH")->value))
-		return (NULL);
-	paths = ft_split(temp, ':');
-	i = -1;
-	while (paths[++i])
-	{
-		temp = ft_strjoin("/", cmd);
-		path = ft_strjoin(paths[i], temp);
-		free(temp);
-		if (stat(path, &s) == 0)
-		{
-			free_strarr(paths);
-			return (path);
-		}
-		free(path);
-	}
-	free_strarr(paths);
-	return (ft_strdup(cmd));
-}
-
-char	**get_envp(t_list *env_list)
-{
-	int temp1;
-	int temp2;
-	char **ret;
-	int i;
-	t_env *env;
-
-	i = 0;
-	temp1 = ft_lstsize(env_list);
-	ret = malloc(sizeof(char*) * (temp1 + 1));
-	while (env_list)
-	{
-		env = env_list->content;
-		if (env->value)
-		{
-			temp1 = ft_strlen(env->key);
-			temp2 = ft_strlen(env->value);
-			ret[i] = malloc(temp1 + temp2 + 2);
-			ft_memcpy(ret[i], env->key, temp1);
-			ret[i][temp1] = '=';
-			ft_memcpy(ret[i] + temp1 + 1, env->value, temp2);
-			ret[i][temp1 + temp2 + 1] = 0;
-			i++;
-		}
-		env_list = env_list->next;
-	}
-	ret[i] = NULL;
-	return (ret);
 }
 
 int		run_cmd_execve(t_cmd *cmd)
@@ -136,23 +75,6 @@ int		run_cmd_execve(t_cmd *cmd)
 	return (127);
 }
 
-int		wait_chlid(pid_t pid)
-{
-	int		signo;
-	int		status;
-	
-	waitpid(pid, &status, 0);
-	if (WIFSIGNALED(status))
-	{
-		signo = WTERMSIG(status);
-		if (signo == SIGINT)
-			return (130);
-		if (signo == SIGQUIT)
-			return (131);
-	}
-	return (WEXITSTATUS(status));
-}
-
 int		run_cmd(t_cmd *cmd, int (*run_cmd_type)(t_cmd*))
 {
 	pid_t	pid;
@@ -170,5 +92,5 @@ int		run_cmd(t_cmd *cmd, int (*run_cmd_type)(t_cmd*))
 		close(cmd->pfd[0][0]);
 	if (cmd->pfd[1][0] != -1)
 		close(cmd->pfd[1][1]);
-	return (wait_chlid(pid));
+	return (wait_child(pid));
 }

@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 16:46:03 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 22:39:04 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <errno.h>
 # include <string.h>
 # include "../libft/libft.h"
+# include "run_cmd.h"
 
 typedef struct	s_env
 {
@@ -78,10 +79,7 @@ int				to_cmd_redirection(char *type, char *value, t_cmd *cmd);
 t_list			*to_token(char *str);
 char			*token_switch(char *token);
 char			*token_remove_quote(char *token);
-int				run_cmd(t_cmd *cmd, int (*run_cmd_type)(t_cmd*));
 void			fork_cmd(t_list *cmd_list);
-int				run_cmd_execve(t_cmd *cmd);
-int				is_cmd_builtin(char *cmd);
 int				ft_env(t_list *env);
 int				ft_echo(char **argv);
 int				ft_pwd(void);
@@ -109,8 +107,6 @@ void			ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void
 int				ft_nbr_length(int n);
 void			handle_signal_main(int signo);
 void			handle_signal_chlid(int signo);
-char			**wildcard(char **argv);
-char			*rd_wildcard(char *str);
 void			init_term(void);
 void			init_tc(void);
 void			reinit_termcap(void);
