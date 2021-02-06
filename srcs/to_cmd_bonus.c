@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   to_cmd.c                                           :+:      :+:    :+:   */
+/*   to_cmd_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:24 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 23:49:56 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/06 23:54:41 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "wildcard_bonus.h"
 
 int			get_argv_len(t_list *token)
 {
@@ -115,8 +116,12 @@ t_list		*to_cmd(t_list *token)
 		temp = new_cmd();
 		if (is_type_token(token->content))
 			parse_type_token(&token, temp);
-		else if (!(temp->argv = parse_argv(&token, temp)))
-			return (clear_cmd(temp, list, token));
+		else
+		{
+			if (!(temp->argv = parse_argv(&token, temp)))
+				return (clear_cmd(temp, list, token));
+			temp->argv = wildcard(temp->argv);
+		}
 		ft_lstadd_back(&list, ft_lstnew(temp));
 	}
 	if (!check_cmd_syntax(list))

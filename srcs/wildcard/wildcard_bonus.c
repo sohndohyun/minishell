@@ -6,11 +6,10 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 13:06:18 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 21:34:14 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/06 23:55:49 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "wildcard_bonus.h"
 
 void	wildcard_inloop(char **argv, int i, int *argc)

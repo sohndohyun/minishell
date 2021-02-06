@@ -232,13 +232,6 @@ char	**print_file_error(int i, char **argv, char *file_name);
 char	**cmd_syntax_error(void);
 
 /*
-** Src is : ../srcs/wildcard_bonus.c
-*/
-void	wildcard_inloop(char **argv, int i, int *argc);
-char	**wildcard(char **argv);
-char	*rd_wildcard(char *str);
-
-/*
 ** Src is : ../srcs/to_token_utils.c
 */
 int		get_key_length(char *key);
@@ -348,13 +341,6 @@ void	free_cmd(void *value);
 t_cmd	*new_cmd(void);
 int		check_cmd_syntax(t_list *cmd);
 t_list	*clear_cmd(t_cmd *cmd, t_list *cmd_list, t_list *token);
-
-/*
-** Src is : ../srcs/wildcard_util_bonus.c
-*/
-int		iswildcard(char *str);
-int		ft_getargc(char **argv);
-void	copy_argv(char **dst, char **src, int n);
 
 /*
 ** Src is : ../srcs/ft_export_utils.c
