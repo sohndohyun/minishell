@@ -1,41 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_prompt.c                                     :+:      :+:    :+:   */
+/*   ft_export_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/20 14:24:14 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 14:55:52 by hyeonski         ###   ########.fr       */
+/*   Created: 2021/02/06 16:45:21 by hyeonski          #+#    #+#             */
+/*   Updated: 2021/02/06 16:45:40 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ascii_art(void)
+int			check_first_equal_char(int *pos, char *str)
 {
-	int		fd;
-	char	*line;
-
-	line = 0;
-	if (!(fd = open("ascii_art.txt", O_RDONLY)))
-	{
-		write(1, "\nError in open\n", 15);
+	*pos = 0;
+	while (str[*pos] != '=' && str[*pos] != '\0')
+		(*pos)++;
+	if (*pos == 0)
 		return (0);
-	}
-	while (get_next_line(fd, &line) != 0)
-	{
-		write(1, line, ft_strlen(line));
-		write(1, "\n", 1);
-		free(line);
-	}
-	write(1, line, ft_strlen(line));
-	write(1, "\n", 1);
-	free(line);
 	return (1);
 }
 
-void	print_prompt(void)
+int			is_valid_env_key(char *key)
 {
-	write(STDOUT_FILENO, "minishell$ ", 11);
+	int		is_first;
+
+	if (!key)
+		return (0);
+	is_first = 1;
+	while (*key)
+	{
+		if (is_first == 1 && ft_isdigit(*key))
+			return (0);
+		if (!ft_isalnum(*key) && *key != '_')
+		{
+			if (*key == '+' && *(key + 1) == '\0')
+				return (1);
+			return (0);
+		}
+		key++;
+		is_first = 0;
+	}
+	return (1);
 }

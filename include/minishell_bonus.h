@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   minishell_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:42:31 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/06 16:46:03 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 15:05:04 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,10 @@ typedef struct	s_env
 	char		*value;
 }				t_env;
 
-# define CT_CMD 0
-# define CT_SEMI 1
+# define CT_NORM 1
 # define CT_PIPE 2
 # define CT_AND 3
 # define CT_OR 4
-# define CT_BEGIN 5
-# define CT_END 6
-
 # define TRUE 1
 # define FALSE 2
 
@@ -115,11 +111,10 @@ void			init_term(void);
 void			init_tc(void);
 void			reinit_termcap(void);
 t_list			*get_env(char **envp);
-char			*ft_strcat(char *dst, const char *src);
-void			free_strarr(char **arr);
-int				check_first_equal_char(int *pos, char *str);
-int				is_valid_env_key(char *key);
 
 extern t_list	*g_env;
+
+#include <stdio.h>
+# include "termcaps.h"
 
 #endif

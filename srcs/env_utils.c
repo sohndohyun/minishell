@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:55:10 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/01 03:07:43 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/06 14:46:08 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,16 @@ void	modify_env(t_list *env, char *key, char *value)
 			if (is_equal_key(env->content, key))
 				modify_value(env->content, value);
 		env = env->next;
+	}
+}
+
+void	add_env(t_list *env, char *key, char *value)
+{
+	if (search_env(env, key) == NULL)
+		ft_lstadd_back(&env, ft_lstnew(new_env(key, value)));
+	else
+	{
+		modify_env(env, key, value);
+		free(key);
 	}
 }

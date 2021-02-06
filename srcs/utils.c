@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:27:06 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/01 19:36:22 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 14:49:54 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,32 +89,118 @@ int		ft_nbr_length(int n)
 	}
 	return (i);
 }
-char	**ft_split_token(char *str, char *set)
+
+char	*ft_strjoin_middle(char *s1, const char *s2, int div)
 {
-	char	**result;
-	int		word_cnt;
+	char	*str;
+	int		l;
+
+	l = ft_strlen(s1) + 1;
+	if (!s2)
+	{
+		str = ft_strdup(s1);
+		free((void*)s1);
+		return (str);
+	}
+	if (!(str = (char*)malloc(sizeof(char) * (l + 2))))
+		return (NULL);
+	ft_strlcpy(str, s1, div);
+	str[div] = '\0';
+	ft_strcat(str, s2);
+	while (div < l)
+	{
+		str[div] = s1[div - 1];
+		div++;
+	}
+	ft_free_and_null((void **)&s1);
+	str[div] = '\0';
+	return (str);
+}
+
+
+char	*ft_strjoin_middle2(char *s1, const char *s2, int div)
+{
+	char	*str;
+	int		l;
+	char	*tmp;
+
+	if (!s2)
+	{
+		str = ft_strdup(s1);
+		free((void*)s1);
+		return (str);
+	}
+	l = ft_strlen(s1) + ft_strlen(s2);
+	if (!(str = (char*)malloc(sizeof(char) * (l + 1))))
+		return (NULL);
+	ft_strlcpy(str, s1, div + 1);
+	ft_strcat(str, s2);
+	tmp = ft_substr(s1, div, ft_strlen(s1) - div);
+	ft_strcat(str, tmp);
+	free(tmp);
+	return (str);
+}
+
+char	*ft_strncat(char *s1, const char *s2, size_t n)
+{
+	int		i;
+
+	i = ft_strlen(s1);
+	while (*s2 && n)
+	{
+		s1[i] = *s2;
+		i++;
+		s2++;
+		n--;
+	}
+	s1[i] = '\0';
+	return (s1);
+}
+
+char	*ft_strcat(char *dst, const char *src)
+{
 	int		i;
 	int		j;
-	int		word_idx;
-	
 
-	word_cnt = get_word_count(str, set);
-	if ((result = (char **)malloc(sizeof(char *) * (word_cnt + 1))) == NULL)
-		return (NULL);
-	i = 0;
+	i = ft_strlen(dst);
 	j = 0;
-	word_idx = 0;
-	while (str[i] && str[j] && word_idx < word_cnt)
+	while (src[j])
 	{
-		if (str[j])
-			j++;
-		while (str[j] && str[j] != '$' && ft_strchr(set, str[j]) == NULL)
-			j++;
-		result[word_idx++] = ft_substr(str + i, 0, j - i);
-		i = j;
+		dst[i] = src[j];
+		i++;
+		j++;
 	}
-	if (str[i] != '\0')
-		result[word_idx++] = ft_substr(str + i, 0, j - i);
-	result[word_idx] = NULL;
-	return (result);
+	dst[i] = '\0';
+	return (dst);
+}
+
+char	*ft_dups1_frees2(const char *s1, char *s2)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	if (!(str = (char*)malloc(sizeof(char) * ft_strlen(s1) + 1)))
+		return (NULL);
+	while (s1[i])
+	{
+		str[i] = (char)s1[i];
+		i++;
+	}
+	str[i] = '\0';
+	free(s2);
+	s2 = NULL;
+	return (str);
+}
+
+void free_strarr(char **arr)
+{
+	int i;
+
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
 }

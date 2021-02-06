@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils2.c                                       :+:      :+:    :+:   */
+/*   env_control.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 14:28:10 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/01/31 15:07:33 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/06 14:46:12 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,4 @@ t_env	*new_env(char *key, char *value)
 	env->key = key;
 	env->value = value;
 	return (env);
-}
-
-void	add_env(t_list *env, char *key, char *value)
-{
-	if (search_env(env, key) == NULL)
-		ft_lstadd_back(&env, ft_lstnew(new_env(key, value)));
-	else
-	{
-		modify_env(env, key, value);
-		free(key);
-	}
 }
