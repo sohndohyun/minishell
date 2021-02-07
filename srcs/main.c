@@ -3,17 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/07 01:06:30 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 15:57:24 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "env.h"
-
+#include <stdio.h>
 t_list	*g_env;
+
+void	print_bigcmd(t_list *cmd)
+{
+	t_bigcmd *bcmd;
+
+	while (cmd)
+	{
+		bcmd = cmd->content;
+		printf("type: %d\n", bcmd->type);
+		if (bcmd->cmdstr)
+			printf("str: %s\n", bcmd->cmdstr);
+		cmd = cmd->next;
+	}
+}
 
 void	run_minishell(char **line, t_list *token, t_list *cmd)
 {
@@ -24,15 +38,15 @@ void	run_minishell(char **line, t_list *token, t_list *cmd)
 		print_prompt();
 		if (!get_input(line))
 			continue ;
-		if (!(token = to_token(*line)))
-			continue ;
-		if (!(cmd = to_cmd(token)))
-			continue ;
-		free(*line);
+		if (!(token = to_bigtoken(*line)))
+			continue;
+		if (!(cmd = to_bigcmd(token)))
+			continue;
 		ft_lstclear(&token, free);
-		fork_cmd(cmd);
-		ft_lstclear(&cmd, free_cmd);
-	}
+		run_bigcmd(cmd);
+		ft_lstclear(&cmd, free_bigcmd);
+		free(*line);
+	} 
 }
 
 int		main(int argc, char **argv, char **envp)
