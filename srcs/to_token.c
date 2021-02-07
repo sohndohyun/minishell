@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:53:04 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/07 16:07:08 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/07 22:15:32 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		find_next_ch(char *str, char c)
 static int		need_seperate(char *c)
 {
 	return (ft_isspace(*c) || *c == '<' || *c == '>'
-			|| *c == '|'|| ft_strncmp(c, "&&", 2) == 0);
+			|| *c == '|' || ft_strncmp(c, "&&", 2) == 0);
 }
 
 static int		find_token_non_end(char *str)

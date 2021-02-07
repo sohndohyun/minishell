@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 03:38:54 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/07 15:57:22 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/07 22:28:17 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int		find_token_length(char *str)
 	return (find_token_non_end(str));
 }
 
-t_list	*to_bigtoken(char *str)
+t_list			*to_bigtoken(char *str)
 {
 	t_list		*list;
 	int			token_len;
@@ -85,12 +85,15 @@ t_list	*to_bigtoken(char *str)
 	{
 		if (ft_isspace(str[i]))
 			i++;
-		token_len = find_token_length(str + i);
-		if (token_len == -1)
-			return (handle_syntax_error(&list, str));
-		temp = ft_substr(str + i, 0, token_len);
-		ft_lstadd_back(&list, ft_lstnew(temp));
-		i += token_len;
+		else
+		{
+			token_len = find_token_length(str + i);
+			if (token_len == -1)
+				return (handle_syntax_error(&list, str));
+			temp = ft_substr(str + i, 0, token_len);
+			ft_lstadd_back(&list, ft_lstnew(temp));
+			i += token_len;
+		}
 	}
 	free(str);
 	return (list);
