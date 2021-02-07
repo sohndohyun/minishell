@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 12:16:55 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/07 00:42:14 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 03:22:12 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void		fork_cmd(t_list *cmd_list)
 	int		status;
 	int		able;
 
-	status = 0;
+	status = errno;
 	able = 1;
 	set_cmd_pfd(cmd_list);
 	signal(SIGINT, handle_signal_chlid);

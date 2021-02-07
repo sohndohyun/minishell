@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 00:31:43 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/07 01:45:38 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/07 13:32:59 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,13 @@ typedef struct	s_cmd
 	int			pfd[2][2];
 }				t_cmd;
 
-extern t_list		*g_env;
+typedef struct	s_bigcmd
+{
+	int			type;
+	char		*cmdstr;
+}				t_bigcmd;
+
+extern t_list	*g_env;
 
 void			print_prompt(void);
 int				setup(void);
@@ -79,7 +85,6 @@ int				get_herdoc_input(char **line);
 int				here_document(char *value);
 int				get_argv_len(t_list *token);
 void			kvlen(char *s1, char *s2, int *key, int *value);
-int				check_cmd_bucket(t_list *cmd);
 
 void			fork_cmd(t_list *cmd_list);
 int				is_cmd_builtin(char *cmd);
@@ -109,4 +114,8 @@ t_list			*handle_syntax_error(t_list **list, char *str);
 char			**print_file_error(int i, char **argv, char *file_name);
 char			**cmd_syntax_error(void);
 
+t_list			*to_bigtoken(char *str);
+t_list			*to_bigcmd(t_list *bigtoken);
+void			run_bigcmd(t_list *cmd_list);
+void			free_bigcmd(void *value);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_cmd_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 23:07:06 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/07 01:07:51 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 15:27:03 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ int			check_cmd_syntax(t_list *cmd)
 	int		cur;
 	int		next;
 
-	if (!check_cmd_bucket(cmd))
-		return (0);
 	while (cmd)
 	{
 		cur = ((t_cmd*)cmd->content)->type;

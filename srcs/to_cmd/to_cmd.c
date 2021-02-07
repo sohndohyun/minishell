@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:24 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/07 00:40:41 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 14:44:01 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,29 +79,6 @@ void		parse_type_token(t_list **token, t_cmd *cmd)
 	else
 		cmd->type = CT_END;
 	(*token) = (*token)->next;
-}
-
-int			check_cmd_bucket(t_list *cmd)
-{
-	int		stack;
-	int		cur;
-
-	stack = 0;
-	while (cmd)
-	{
-		cur = ((t_cmd*)cmd->content)->type;
-		if (cur == CT_BEGIN)
-			stack++;
-		else if (cur == CT_END)
-		{
-			if (--stack < 0)
-				return (0);
-		}
-		cmd = cmd->next;
-	}
-	if (stack != 0)
-		return (0);
-	return (1);
 }
 
 t_list		*to_cmd(t_list *token)

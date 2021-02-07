@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/07 01:46:57 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/07 15:30:21 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ void			run_minishell(char **line, t_list *token, t_list *cmd)
 			add_cmd_to_history(*line);
 			if (*line)
 			{
-				token = to_token(*line);
-				cmd = to_cmd(token);
-				fork_cmd(cmd);
+				token = to_bigtoken(*line);
+				cmd = to_bigcmd(token);
+				ft_lstclear(&token, free);
+				run_bigcmd(cmd);
+				ft_lstclear(&cmd, free_bigcmd);
 			}
-			ft_lstclear(&token, free);
-			ft_lstclear(&cmd, free_cmd);
 			tcsetattr(0, TCSANOW, &g_tc->term);
 		}
 		ft_free_and_null((void **)line);
