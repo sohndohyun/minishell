@@ -6,33 +6,16 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 03:31:05 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/07 22:27:02 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/07 22:51:04 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_bigcmd		*new_bigcmd(void)
+static int		check_bigcmd_bucket(t_list *cmd)
 {
-	t_bigcmd	*cmd;
-
-	cmd = malloc(sizeof(t_bigcmd));
-	cmd->cmdstr = NULL;
-	cmd->type = CT_CMD;
-	return (cmd);
-}
-
-static int			is_type_bigtoken(char *str)
-{
-	return (ft_strcmp(str, ";") == 0
-	|| ft_strcmp(str, "&&") == 0 || ft_strcmp(str, "||") == 0
-	|| ft_strcmp(str, "(") == 0 || ft_strcmp(str, ")") == 0);
-}
-
-static int			check_bigcmd_bucket(t_list *cmd)
-{
-	int		stack;
-	int		cur;
+	int			stack;
+	int			cur;
 
 	stack = 0;
 	while (cmd)
@@ -52,15 +35,9 @@ static int			check_bigcmd_bucket(t_list *cmd)
 	return (1);
 }
 
-static int			check_bigcmd_syntax(t_list *cmd)
+int				check_bigcmd_syntax_loop(t_list *cmd,
+					int cur, int next, int flag)
 {
-	int		cur;
-	int		next;
-	int		flag;
-
-	if (!check_bigcmd_bucket(cmd))
-		return (0);
-	flag = 1;
 	while (cmd)
 	{
 		cur = ((t_bigcmd*)cmd->content)->type;
@@ -85,9 +62,16 @@ static int			check_bigcmd_syntax(t_list *cmd)
 	return (1);
 }
 
-void		parse_type_bigtoken(t_list **token, t_bigcmd *cmd)
+static int		check_bigcmd_syntax(t_list *cmd)
 {
-	char	*temp;
+	if (!check_bigcmd_bucket(cmd))
+		return (0);
+	return (check_bigcmd_syntax_loop(cmd, 0, 0, 1));
+}
+
+void			parse_type_bigtoken(t_list **token, t_bigcmd *cmd)
+{
+	char		*temp;
 
 	temp = (*token)->content;
 	if (ft_strcmp(temp, "||") == 0)
@@ -102,7 +86,7 @@ void		parse_type_bigtoken(t_list **token, t_bigcmd *cmd)
 		cmd->type = CT_END;
 }
 
-t_list				*to_bigcmd(t_list *bigtoken)
+t_list			*to_bigcmd(t_list *bigtoken)
 {
 	t_list		*list;
 	t_bigcmd	*temp;
