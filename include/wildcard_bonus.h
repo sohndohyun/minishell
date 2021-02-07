@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 23:51:44 by dsohn             #+#    #+#             */
 /*   Updated: 2021/02/07 22:11:59 by dsohn            ###   ########.fr       */

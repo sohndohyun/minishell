@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 19:11:54 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/07 16:38:34 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 22:22:42 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,9 @@ char	**cmd_syntax_error(void)
 	return (NULL);
 }
 
-t_list	*handle_bigcmd_syntax_error(t_list **list)
+t_list	*handle_cmd_syntax_error(t_list **list, void (*free_fct)(void *))
 {
-	ft_lstclear(list, free_bigcmd);
-	ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
-	errno = 258;
-	return (NULL);
-}
-
-t_list	*handle_cmd_syntax_error(t_list **list)
-{
-	ft_lstclear(list, free_cmd);
+	ft_lstclear(list, free_fct);
 	ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
 	errno = 258;
 	return (NULL);

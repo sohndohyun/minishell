@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   to_bigcmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 03:31:05 by dsohn             #+#    #+#             */
 /*   Updated: 2021/02/07 22:27:02 by dsohn            ###   ########.fr       */
@@ -123,7 +123,7 @@ t_list				*to_bigcmd(t_list *bigtoken)
 	if (!check_bigcmd_syntax(list))
 	{
 		ft_lstclear(&save, free);
-		return (handle_bigcmd_syntax_error(&list));
+		return (handle_cmd_syntax_error(&list, free_bigcmd));
 	}
 	return (list);
 }

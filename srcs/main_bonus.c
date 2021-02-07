@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/07 17:09:54 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/07 22:16:42 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,13 @@ void			run_minishell(char **line, t_list *token, t_list *cmd)
 			tcsetattr(0, TCSANOW, &g_tc->term_backup);
 			add_cmd_to_history(*line);
 			if (*line)
-			{
 				if ((token = to_bigtoken(*line)))
-				{
 					if ((cmd = to_bigcmd(token)))
 					{
 						run_bigcmd(cmd);
 						ft_lstclear(&cmd, free_bigcmd);
 						ft_lstclear(&token, free);
 					}
-				}
-			}
 			tcsetattr(0, TCSANOW, &g_tc->term);
 		}
 		ft_free_and_null((void **)line);

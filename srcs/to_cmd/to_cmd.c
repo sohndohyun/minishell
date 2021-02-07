@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:24 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/07 16:38:47 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 22:22:25 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_list		*to_cmd(t_list *token)
 	if (!check_cmd_syntax(list))
 	{
 		ft_lstclear(&token, free);
-		return (handle_cmd_syntax_error(&list));
+		return (handle_cmd_syntax_error(&list, free_cmd));
 	}
 	return (list);
 }
