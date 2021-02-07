@@ -31,6 +31,7 @@ SRCS= srcs/main.c \
 		srcs/builtin/ft_pwd.c \
 		srcs/builtin/ft_unset.c \
 		srcs/to_cmd/to_bigcmd.c \
+		srcs/to_cmd/to_bigcmd_utils.c \
 		srcs/to_bigtoken.c \
 		srcs/run_bigcmd.c
 
@@ -72,6 +73,7 @@ SRCS_BONUS= srcs/main_bonus.c \
 		srcs/builtin/ft_pwd.c \
 		srcs/builtin/ft_unset.c \
 		srcs/to_cmd/to_bigcmd.c \
+		srcs/to_cmd/to_bigcmd_utils.c \
 		srcs/to_bigtoken.c \
 		srcs/run_bigcmd.c
 
