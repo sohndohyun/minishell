@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 00:31:43 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/07 22:51:36 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/08 00:23:30 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void			paste_line(char **line);
 t_list			*to_token(char *str);
 int				get_key_length(char *key);
 char			*find_value(char *str, int n);
-char			*token_remove_quote(char *token);
+char			*token_remove_quote(char *token, char *it,
+	char *save, int flag);
 void			switch_value(char **ret, char **it, char **save);
 char			*token_switch(char *token);
 

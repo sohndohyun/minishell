@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_token_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 21:52:37 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/07 01:06:59 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/08 00:26:48 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,29 @@ char		*find_value(char *str, int n)
 	return (ft_strdup(env->value));
 }
 
-char		*token_remove_quote(char *token)
+char		*token_remove_quote(char *token, char *it, char *save, int flag)
 {
-	char	*it;
 	char	*ret;
-	char	*save;
 
 	ret = ft_strdup("");
-	it = token;
-	save = token;
 	while (*it)
-	{
-		if ((*it == '\'' || *it == '\"') && (it == token || *(it - 1) != '\\'))
+		if (flag == *it && (it == token || *(it - 1) != '\\'))
 		{
-			*it = 0;
+			flag = 0;
+			*it++ = 0;
 			ret = ft_strjoin_free_s1(ret, save);
-			it++;
+			save = it;
+		}
+		else if ((*it == '\'' || *it == '\"') &&
+			(it == token || *(it - 1) != '\\') && flag == 0)
+		{
+			flag = *it;
+			*it++ = 0;
+			ret = ft_strjoin_free_s1(ret, save);
 			save = it;
 		}
 		else
 			it++;
-	}
 	ret = ft_strjoin_free_s1(ret, save);
 	free(token);
 	return (ret);
