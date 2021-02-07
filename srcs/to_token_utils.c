@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 21:52:37 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/08 00:26:48 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/08 00:50:16 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ char		*find_value(char *str, int n)
 	key[n] = 0;
 	ft_memcpy(key, str, n);
 	env = search_env(g_env, key);
+	free(key);
 	if (!env)
 		return (NULL);
-	free(key);
 	return (ft_strdup(env->value));
 }
 
