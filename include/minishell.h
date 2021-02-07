@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 00:31:43 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/07 22:23:13 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 22:51:36 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,14 @@ void			print_error(char *msg, int errnum, char *err_val);
 t_list			*handle_syntax_error(t_list **list, char *str);
 char			**print_file_error(int i, char **argv, char *file_name);
 char			**cmd_syntax_error(void);
-t_list			*handle_cmd_syntax_error(t_list **list, void (*free_fct)(void *));
+t_list			*handle_cmd_syntax_error(t_list **list,
+		void (*free_fct)(void *));
 
 t_list			*to_bigtoken(char *str);
 t_list			*to_bigcmd(t_list *bigtoken);
 void			run_bigcmd(t_list *cmd_list);
 void			free_bigcmd(void *value);
+t_bigcmd		*new_bigcmd(void);
+int				is_type_bigtoken(char *str);
 
 #endif
