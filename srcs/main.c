@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/07 22:25:59 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/08 01:11:37 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	run_minishell(char **line, t_list *token, t_list *cmd)
 		if (!get_input(line))
 			continue ;
 		if (!(token = to_bigtoken(*line)))
+		{
+			ft_free_and_null((void **)line);
 			continue;
+		}
 		if (!(cmd = to_bigcmd(token)))
 		{
 			ft_free_and_null((void **)line);
