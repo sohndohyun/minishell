@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_bigcmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 03:31:05 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/07 16:32:46 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 17:56:35 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,18 @@ static int			check_bigcmd_syntax(t_list *cmd)
 {
 	int		cur;
 	int		next;
+	int		flag;
 
 	if (!check_bigcmd_bucket(cmd))
 		return (0);
+	flag = 1;
 	while (cmd)
 	{
 		cur = ((t_bigcmd*)cmd->content)->type;
 		next = cmd->next ? ((t_bigcmd*)cmd->next->content)->type : -1;
-		if (cur == CT_CMD && (next == CT_CMD || next == CT_BEGIN))
+		if (flag && (cur == CT_AND || cur == CT_END || cur == CT_OR))
+			return (0);
+		else if (cur == CT_CMD && (next == CT_CMD || next == CT_BEGIN))
 			return (0);
 		else if (cur == CT_SEMI && (next == CT_SEMI
 					|| next == CT_AND || next == CT_OR))
@@ -73,7 +77,10 @@ static int			check_bigcmd_syntax(t_list *cmd)
 			return (0);
 		else if (cur == CT_END && (next == CT_CMD || next == CT_BEGIN))
 			return (0);
+		if (cur == CT_CMD && ((t_bigcmd*)cmd->content)->cmdstr[0] == '|')
+			return (0);
 		cmd = cmd->next;
+		flag = 0;
 	}
 	return (1);
 }

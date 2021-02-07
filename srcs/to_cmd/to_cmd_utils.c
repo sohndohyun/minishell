@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 23:07:06 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/07 15:27:03 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/07 17:27:48 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,21 @@ int			check_cmd_syntax(t_list *cmd)
 {
 	int		cur;
 	int		next;
+	int		flag;
 
+	flag = 1;
 	while (cmd)
 	{
 		cur = ((t_cmd*)cmd->content)->type;
 		next = cmd->next ? ((t_cmd*)cmd->next->content)->type : -1;
-		if (cur == CT_CMD && (next == CT_CMD || next == CT_BEGIN))
+		if (cur == CT_CMD && next == CT_CMD)
 			return (0);
-		else if (cur == CT_PIPE && (next != CT_CMD))
+		else if (cur == CT_PIPE && next != CT_CMD)
 			return (0);
-		else if (cur == CT_SEMI && (next == CT_SEMI || next == CT_PIPE
-					|| next == CT_AND || next == CT_OR))
-			return (0);
-		else if ((cur == CT_AND || cur == CT_OR || cur == CT_BEGIN)
-				&& (next != CT_CMD && next != CT_BEGIN))
-			return (0);
-		else if (cur == CT_END &&
-				(next == CT_CMD || next == CT_PIPE || next == CT_BEGIN))
+		else if (flag && cur == CT_PIPE)
 			return (0);
 		cmd = cmd->next;
+		flag = 0;
 	}
 	return (1);
 }
