@@ -3,51 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 13:06:18 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/07 01:24:29 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 18:51:19 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wildcard_bonus.h"
 #include "utils.h"
 
-void	wildcard_inloop(char **argv, int i, int *argc)
-{
-	glob_t	globbuf;
-	int		imsi;
-	char	**temp;
-
-	glob(argv[i], 0, NULL, &globbuf);
-	if (globbuf.gl_pathc > 0)
-	{
-		imsi = *argc + globbuf.gl_pathc - 1;
-		temp = malloc(sizeof(char*) * (imsi + 1));
-		temp[imsi] = 0;
-		copy_argv(temp, argv, i);
-		copy_argv(temp + i, globbuf.gl_pathv, globbuf.gl_pathc);
-		copy_argv(temp + i + globbuf.gl_pathc,
-			argv + i + 1, *argc - i - 1);
-		ft_free_2d_arr((void**)argv);
-		argv = temp;
-		i += globbuf.gl_pathc - 1;
-		*argc = imsi;
-	}
-	globfree(&globbuf);
-}
-
 char	**wildcard(char **argv)
 {
 	int		i;
 	int		argc;
-
+	glob_t	globbuf;
+	int		imsi;
+	char	**temp;
+	
 	i = 0;
 	argc = ft_getargc(argv);
 	while (argv && argv[i])
 	{
 		if (iswildcard(argv[i]))
-			wildcard_inloop(argv, i, &argc);
+		{
+			glob(argv[i], 0, NULL, &globbuf);
+			if (globbuf.gl_pathc > 0)
+			{
+				imsi = argc + globbuf.gl_pathc - 1;
+				temp = malloc(sizeof(char*) * (imsi + 1));
+				temp[imsi] = 0;
+				copy_argv(temp, argv, i);
+				copy_argv(temp + i, globbuf.gl_pathv, globbuf.gl_pathc);
+				copy_argv(temp + i + globbuf.gl_pathc,
+					argv + i + 1, argc - i - 1);
+				ft_free_2d_arr((void**)argv);
+				argv = temp;
+				i += globbuf.gl_pathc - 1;
+				argc = imsi;
+			}
+			globfree(&globbuf);
+		}
 		i++;
 	}
 	return (argv);
