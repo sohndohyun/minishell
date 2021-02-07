@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_cmd_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:24 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/07 15:26:41 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/07 16:39:50 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ t_list		*to_cmd(t_list *token)
 	}
 	if (!check_cmd_syntax(list))
 	{
-		ft_lstclear(&token, free);
-		return (handle_syntax_error(&list, NULL));
+		ft_lstclear(&token, free_cmd);
+		return (handle_cmd_syntax_error(&list));
 	}
 	return (list);
 }

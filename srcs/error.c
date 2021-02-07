@@ -6,11 +6,12 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 19:11:54 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 22:56:10 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 16:38:34 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "utils.h"
 
 void	print_error(char *msg, int errnum, char *err_val)
 {
@@ -27,7 +28,7 @@ t_list	*handle_syntax_error(t_list **list, char *str)
 	ft_lstclear(list, free);
 	ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
 	errno = 258;
-	free(str);
+	ft_free_and_null((void **)&str);
 	return (NULL);
 }
 
@@ -43,6 +44,22 @@ char	**print_file_error(int i, char **argv, char *file_name)
 
 char	**cmd_syntax_error(void)
 {
+	ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
+	errno = 258;
+	return (NULL);
+}
+
+t_list	*handle_bigcmd_syntax_error(t_list **list)
+{
+	ft_lstclear(list, free_bigcmd);
+	ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
+	errno = 258;
+	return (NULL);
+}
+
+t_list	*handle_cmd_syntax_error(t_list **list)
+{
+	ft_lstclear(list, free_cmd);
 	ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
 	errno = 258;
 	return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_bigcmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 03:31:05 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/07 16:02:44 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/07 16:32:46 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ t_list				*to_bigcmd(t_list *bigtoken)
 	if (!check_bigcmd_syntax(list))
 	{
 		ft_lstclear(&save, free);
-		return (handle_syntax_error(&list, NULL));
+		return (handle_bigcmd_syntax_error(&list));
 	}
 	return (list);
 }
