@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 01:49:29 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/07 00:49:15 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 22:11:08 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ int		run_cmd_builtin_run(t_cmd *cmd)
 		status = ft_unset(cmd->argv);
 	else if (ft_strcmp(cmd->argv[0], "exit") == 0)
 	{
-		if ((status = ft_exit(cmd->argv)) != 1)
+		if ((status = ft_exit(cmd->argv)) != -1)
 			exit(status);
+		else
+			status = 1;
 	}
 	return (status);
 }

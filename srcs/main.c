@@ -6,29 +6,15 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:44:15 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/07 16:43:30 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/02/07 22:25:59 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "env.h"
 #include "utils.h"
-#include <stdio.h>
+
 t_list	*g_env;
-
-void	print_bigcmd(t_list *cmd)
-{
-	t_bigcmd *bcmd;
-
-	while (cmd)
-	{
-		bcmd = cmd->content;
-		printf("type: %d\n", bcmd->type);
-		if (bcmd->cmdstr)
-			printf("str: %s\n", bcmd->cmdstr);
-		cmd = cmd->next;
-	}
-}
 
 void	run_minishell(char **line, t_list *token, t_list *cmd)
 {
@@ -50,7 +36,7 @@ void	run_minishell(char **line, t_list *token, t_list *cmd)
 		run_bigcmd(cmd);
 		ft_lstclear(&cmd, free_bigcmd);
 		ft_free_and_null((void **)line);
-	} 
+	}
 }
 
 int		main(int argc, char **argv, char **envp)
