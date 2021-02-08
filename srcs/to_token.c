@@ -6,25 +6,11 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:53:04 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/08 00:23:50 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/09 03:22:27 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int		find_next_ch(char *str, char c)
-{
-	char *temp;
-
-	temp = str + 1;
-	while (*temp)
-	{
-		if (*temp == c && *(temp - 1) != '\\')
-			return (temp - str);
-		temp++;
-	}
-	return (-1);
-}
 
 static int		need_seperate(char *c)
 {
@@ -39,7 +25,7 @@ static int		find_token_non_end(char *str)
 
 	if (*str == '\'' || *str == '\"')
 	{
-		imsi = find_next_ch(str, *str);
+		imsi = find_next_ch(str, str, *str);
 		if (imsi == -1)
 			return (-1);
 		temp = str + imsi + 1;
@@ -48,11 +34,11 @@ static int		find_token_non_end(char *str)
 		temp = str + 1;
 	while (*temp)
 	{
-		if (need_seperate(temp) && *(temp - 1) != '\\')
+		if (need_seperate(temp))
 			break ;
-		else if ((*temp == '\'' || *temp == '\"') && *(temp - 1) != '\\')
+		else if ((*temp == '\'' || *temp == '\"'))
 		{
-			if ((imsi = find_next_ch(temp, *temp)) == -1)
+			if ((imsi = find_next_ch(temp, str, *temp)) == -1)
 				return (-1);
 			temp += imsi;
 		}

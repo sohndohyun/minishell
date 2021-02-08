@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 21:52:37 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/08 00:50:16 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/09 03:53:01 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,14 @@ char		*token_remove_quote(char *token, char *it, char *save, int flag)
 
 	ret = ft_strdup("");
 	while (*it)
-		if (flag == *it && (it == token || *(it - 1) != '\\'))
+		if (flag == *it && !(flag == '\"' && is_before_backslash(it, token)))
 		{
 			flag = 0;
 			*it++ = 0;
 			ret = ft_strjoin_free_s1(ret, save);
 			save = it;
 		}
-		else if ((*it == '\'' || *it == '\"') &&
-			(it == token || *(it - 1) != '\\') && flag == 0)
+		else if ((*it == '\'' || *it == '\"') && flag == 0)
 		{
 			flag = *it;
 			*it++ = 0;
@@ -79,7 +78,7 @@ void		switch_value(char **ret, char **it, char **save)
 	*ret = ft_strjoin_free_s1(*ret, *save);
 	(*it)++;
 	keysize = get_key_length(*it);
-	*save = find_value(*it, keysize);
+	*save = keysize > 0 ? find_value(*it, keysize) : ft_strdup("$");
 	*ret = *save ? ft_strjoin_free_s1(*ret, *save) : *ret;
 	free(*save);
 	*it += keysize;
@@ -99,14 +98,14 @@ char		*token_switch(char *token)
 	ret = ft_strdup("");
 	while (*it)
 	{
-		if ((*it == '\'' || *it == '\"') && (it == token || *(it - 1) != '\\'))
+		if ((*it == '\'' || *it == '\"'))
 		{
 			if (flag == 0)
 				flag = *it;
-			else if (flag == *it)
+			else if (flag == *it && !(flag == '\"' && is_before_backslash(it, token)))
 				flag = 0;
 		}
-		if (*it == '$' && (it == token || *(it - 1) != '\\') && flag != '\'')
+		if (*it == '$' && flag != '\'' && !(flag == '\"' && is_before_backslash(it, token)))
 			switch_value(&ret, &it, &save);
 		else
 			it++;

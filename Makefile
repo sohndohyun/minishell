@@ -9,6 +9,7 @@ SRCS= srcs/main.c \
 		srcs/get_input.c \
 		srcs/to_token.c \
 		srcs/to_token_utils.c \
+		srcs/to_token_utils2.c \
 		srcs/to_cmd/to_cmd.c \
 		srcs/to_cmd/to_cmd_utils.c \
 		srcs/to_cmd/to_cmd_redirection.c \
@@ -49,6 +50,7 @@ SRCS_BONUS= srcs/main_bonus.c \
 		srcs/termcap/termcap_utils_bonus.c \
 		srcs/to_token.c \
 		srcs/to_token_utils.c \
+		srcs/to_token_utils2.c \
 		srcs/to_cmd/to_cmd_bonus.c \
 		srcs/to_cmd/to_cmd_utils.c \
 		srcs/to_cmd/to_cmd_redirection_bonus.c \

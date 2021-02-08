@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 00:31:43 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/08 00:23:30 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/09 02:56:44 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,8 @@ void			run_bigcmd(t_list *cmd_list);
 void			free_bigcmd(void *value);
 t_bigcmd		*new_bigcmd(void);
 int				is_type_bigtoken(char *str);
+
+int				find_next_ch(char *str, char *begin, char c);
+int				is_before_backslash(char *str, char *begin);
 
 #endif
