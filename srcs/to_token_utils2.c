@@ -6,11 +6,12 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 14:45:34 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/09 03:56:39 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/09 04:39:52 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "utils.h"
 
 int		is_before_backslash(char *str, char *begin)
 {
@@ -40,4 +41,49 @@ int		find_next_ch(char *str, char *begin, char c)
 		temp++;
 	}
 	return (-1);
+}
+
+char	*token_remove_backslash(char *token)
+{
+	char *it;
+	char *ret;
+	char *save;
+
+	ret = ft_strdup("");
+	save = token;
+	it = token;
+	while (*it)
+		if (*it == '\\' && (it[1] == '\\' || it[1] == '$' || it[1] == '\"'))
+		{
+			*it = 0;
+			ret = ft_strjoin_free_s1(ret, save);
+			save = ft_strdup(" ");
+			save[0] = it[1];
+			ret = ft_strjoin_free_s1(ret, save);
+			free(save);
+			it += 2;
+			save = it;
+		}
+		else
+			it++;
+	ret = ft_strjoin_free_s1(ret, save);
+	free(token);
+	return (ret);
+}
+
+char	*token_remove_quote(char *token)
+{
+	char	c;
+	int		len;
+
+	c = token[0];
+	if (c == '\'' || c == '\"')
+	{
+		len = ft_strlen(token);
+		ft_memmove(token, token + 1, len);
+		token[len - 2] = 0;
+	}
+	if (c == '\"')
+		token = token_remove_backslash(token);
+	return (token);
 }

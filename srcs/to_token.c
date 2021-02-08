@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:53:04 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/09 03:22:27 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/09 04:10:29 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_list			*to_token(char *str)
 			if (token_len == -1)
 				return (handle_syntax_error(&list, str));
 			temp = ft_substr(str + i, 0, token_len);
-			temp = token_remove_quote(temp, temp, temp, 0);
+			temp = token_remove_quote(temp);
 			ft_lstadd_back(&list, ft_lstnew(temp));
 			i += token_len;
 		}

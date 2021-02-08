@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 21:52:37 by dsohn             #+#    #+#             */
-/*   Updated: 2021/02/09 03:53:01 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/09 04:42:16 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,33 +43,6 @@ char		*find_value(char *str, int n)
 	return (ft_strdup(env->value));
 }
 
-char		*token_remove_quote(char *token, char *it, char *save, int flag)
-{
-	char	*ret;
-
-	ret = ft_strdup("");
-	while (*it)
-		if (flag == *it && !(flag == '\"' && is_before_backslash(it, token)))
-		{
-			flag = 0;
-			*it++ = 0;
-			ret = ft_strjoin_free_s1(ret, save);
-			save = it;
-		}
-		else if ((*it == '\'' || *it == '\"') && flag == 0)
-		{
-			flag = *it;
-			*it++ = 0;
-			ret = ft_strjoin_free_s1(ret, save);
-			save = it;
-		}
-		else
-			it++;
-	ret = ft_strjoin_free_s1(ret, save);
-	free(token);
-	return (ret);
-}
-
 void		switch_value(char **ret, char **it, char **save)
 {
 	int		keysize;
@@ -83,6 +56,11 @@ void		switch_value(char **ret, char **it, char **save)
 	free(*save);
 	*it += keysize;
 	*save = *it;
+}
+
+static int	checkflag(int flag, char *it, char *token)
+{
+	return (!(flag == '\"' && is_before_backslash(it, token)));
 }
 
 char		*token_switch(char *token)
@@ -102,10 +80,10 @@ char		*token_switch(char *token)
 		{
 			if (flag == 0)
 				flag = *it;
-			else if (flag == *it && !(flag == '\"' && is_before_backslash(it, token)))
+			else if (flag == *it && checkflag(flag, it, token))
 				flag = 0;
 		}
-		if (*it == '$' && flag != '\'' && !(flag == '\"' && is_before_backslash(it, token)))
+		if (*it == '$' && flag != '\'' && checkflag(flag, it, token))
 			switch_value(&ret, &it, &save);
 		else
 			it++;

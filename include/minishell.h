@@ -6,7 +6,7 @@
 /*   By: dsohn <dsohn@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 00:31:43 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/09 02:56:44 by dsohn            ###   ########.fr       */
+/*   Updated: 2021/02/09 04:10:19 by dsohn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ void			paste_line(char **line);
 t_list			*to_token(char *str);
 int				get_key_length(char *key);
 char			*find_value(char *str, int n);
-char			*token_remove_quote(char *token, char *it,
-	char *save, int flag);
+char			*token_remove_quote(char *token);
 void			switch_value(char **ret, char **it, char **save);
 char			*token_switch(char *token);
 
