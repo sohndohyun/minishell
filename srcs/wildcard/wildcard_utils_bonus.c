@@ -21,7 +21,7 @@ int		iswildcard(char *str)
 	i = 0;
 	while (str && str[i])
 	{
-		if (str[i] == '*' && (i == 0 || str[i - 1] != '\\'))
+		if (str[i] == '*')
 			return (1);
 		i++;
 	}
